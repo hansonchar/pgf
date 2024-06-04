@@ -442,7 +442,7 @@ declare {
   },
 
   summary = [["
-    Assings a uniform priority of 5 to all edges.
+    Assigns a uniform priority of 5 to all edges.
   "]]
 }
 
