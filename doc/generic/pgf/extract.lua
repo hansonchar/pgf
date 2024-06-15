@@ -1,3 +1,4 @@
+-- luacheck:ignore 542
 local lfs = require("lfs")
 local lpeg = require("lpeg")
 local C, Cf, Cg, Ct, P, S, V = lpeg.C, lpeg.Cf, lpeg.Cg, lpeg.Ct, lpeg.P, lpeg.S, lpeg.V
@@ -70,8 +71,8 @@ local extractor = lpeg.P{"document",
 
 -- get the basename and extension of a file
 local function basename(file)
-    local basename, ext = string.match(file, "^(.+)%.([^.]+)$")
-    return basename or "",  ext or file
+    local name, ext = string.match(file, "^(.+)%.([^.]+)$")
+    return name or "",  ext or file
 end
 
 local pathsep = package.config:sub(1,1)
@@ -105,7 +106,7 @@ local function walk(sourcedir, targetdir)
             local f = io.open(sourcedir .. file)
             local text = f:read("*all")
             f:close()
-            local name, ext = basename(file)
+            local name, _ = basename(file)
 
             -- preprocess, strip all commented lines
             text = text:gsub("\n%%[^\n]*","")
@@ -118,20 +119,16 @@ local function walk(sourcedir, targetdir)
             for n, e in ipairs(matches) do
                 local options = e[1]
                 local content = e[2]
-
                 if content:match("remember picture") then
-                    goto continue
-                end
-
+                    -- skip
+                elseif options["setup code"] then
                 -- If the snippet is marked as setup code, we have to put it before
                 -- every other snippet in the same file
-                if options["setup code"] then
+                -- if options["setup code"] then
                     setup_code = setup_code .. strip(content) .. "\n"
-                    goto continue
-                end
-
+                elseif not options["code only"] and not options["setup code"] then
                 -- Skip those that say "code only" or "setup code"
-                if not options["code only"] and not options["setup code"] then
+                -- if not options["code only"] and not options["setup code"] then
                     local newname = name .. "-" .. n .. ".tex"
                     local examplefile = io.open(targetdir .. newname, "w")
 
@@ -154,18 +151,20 @@ local function walk(sourcedir, targetdir)
 
                     examplefile:close()
                 end
-
-                ::continue::
             end
         end
     end
 end
 
 -- Main loop
+-- luacheck:ignore 113
 if #arg < 2 then
     print("Usage: " .. arg[-1] .. " " .. arg[0] .. " <source-dirs...> <target-dir>")
     os.exit(1)
 end
+
 for n = 1, #arg - 1 do
     walk(arg[n], arg[#arg])
 end
+
+os.exit(0)
