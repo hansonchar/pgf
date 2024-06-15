@@ -1,3 +1,4 @@
+-- luacheck:ignore 111 112 113
 -- Identify the bundle and module
 module = "pgf"
 
