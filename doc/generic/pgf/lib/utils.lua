@@ -1,5 +1,12 @@
 local lfs = require "lfs"
 local lpeg = require "lpeg"
+local DEBUG = false
+
+if DEBUG then
+    local luarocks_path = os.getenv("HOME") .. "/.luarocks/share/lua/5.3/?.lua"
+    package.path = package.path .. ";" .. luarocks_path
+end
+local tostring = DEBUG and require "ml".tstring or nil
 
 -- luacheck:ignore 542 (Empty if branch.)
 local utils = {}
@@ -42,7 +49,9 @@ function u.basename(file)
 end
 
 -- Walk the file tree
-function u.walk(sourcedir, targetdir, grammar)
+function u.walk(sourcedir, targetdir, finder)
+    -- print("grammar_t:", grammar_t)
+    -- os.exit()
     -- Make sure the arguments are directories
     assert(lfs.attributes(sourcedir, "mode") == "directory", sourcedir .. " is not a directory")
     assert(lfs.attributes(targetdir, "mode") == "directory", targetdir .. " is not a directory")
@@ -62,7 +71,7 @@ function u.walk(sourcedir, targetdir, grammar)
         elseif lfs.attributes(sourcedir .. file, "mode") == "directory" then
             -- Recurse into subdirectories
             lfs.mkdir(targetdir .. file)
-            u.walk(sourcedir .. file .. u.pathsep, targetdir .. file .. u.pathsep, grammar)
+            u.walk(sourcedir .. file .. u.pathsep, targetdir .. file .. u.pathsep, finder)
         elseif lfs.attributes(sourcedir .. file, "mode") == "file" then
             print("Processing " .. sourcedir .. file)
 
@@ -76,13 +85,24 @@ function u.walk(sourcedir, targetdir, grammar)
             text = text:gsub("\n%%[^\n]*", "")
 
             -- extract all code examples
-            local matches = grammar:match(text) or {}
+            local matches = finder.grammar:match(text) or {}
+
+            if DEBUG then
+                print("matches:", matches)
+                print("tostring(matches):", tostring(matches))
+            end
 
             -- write code examples to separate files
             local setup_code = ""
             for n, e in ipairs(matches) do
-                local options = e[1]
-                local content = e[2]
+                -- local options = e[1]
+                -- local content = e[2]
+                local options = finder.get_options(e)
+                local content = finder.get_cotent(e)
+                -- if DEBUG then
+                --     print("options:", options)
+                --     print("content:", content)
+                -- end
                 if content:match("remember picture") then
                     -- skip
                 elseif options["setup code"] then
@@ -93,7 +113,7 @@ function u.walk(sourcedir, targetdir, grammar)
                 elseif not options["code only"] and not options["setup code"] then
                     -- Skip those that say "code only" or "setup code"
                     -- if not options["code only"] and not options["setup code"] then
-                    local newname = name .. "-" .. n .. ".tex"
+                    local newname = finder.get_name() .. "-" .. name .. "-" .. n .. ".tex"
                     local examplefile = io.open(targetdir .. newname, "w")
 
                     examplefile:write "\\documentclass{standalone}\n"

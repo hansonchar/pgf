@@ -7,7 +7,19 @@ end
 
 package.path = pwd() .. "lib/?.lua;" .. package.path
 local utils = require "utils"
-local document_grammar = require "document_grammar"
+local documentfinder = require "documentfinder"
+local examplefinder = require "examplefinder"
+
+local DEBUG = false
+
+if DEBUG then
+    local luarocks_path = os.getenv("HOME") .. "/.luarocks/share/lua/5.3/?.lua"
+    package.path = package.path .. ";" .. luarocks_path
+    print("package.path: " .. package.path)
+    local tostring = require "ml".tstring
+    print("example_grammar:", examplefinder)
+    print("example_grammar:", tostring(examplefinder))
+end
 
 --[[
     Sample Usage:
@@ -25,7 +37,11 @@ if #arg < 2 then
 end
 
 for n = 1, #arg - 1 do
-    utils.walk(arg[n], arg[#arg], document_grammar)
+    utils.walk(arg[n], arg[#arg], documentfinder)
+end
+
+for n = 1, #arg - 1 do
+    utils.walk(arg[n], arg[#arg], examplefinder)
 end
 
 os.exit(0)

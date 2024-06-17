@@ -2,8 +2,10 @@ local lpeg = require("lpeg")
 local C, Cf, Cg, Ct, P, S, V = lpeg.C, lpeg.Cf, lpeg.Cg, lpeg.Ct, lpeg.P, lpeg.S, lpeg.V
 local u = require("utils")
 
+local t = {}
+
 -- Grammar to extract code examples from document
-local grammar =
+t.grammar =
     P {
     "document",
     name = C((1 - S ",]=") ^ 1),
@@ -20,4 +22,16 @@ local grammar =
     document = V "anything" * Ct(V "codeexample" * (V "anything" * V "codeexample") ^ 0) * V "anything"
 }
 
-return grammar
+function t.get_options(e)
+    return e[1]
+end
+
+function t.get_cotent(e)
+    return e[2]
+end
+
+function t.get_name()
+    return "document"
+end
+
+return t
