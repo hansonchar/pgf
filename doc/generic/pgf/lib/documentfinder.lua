@@ -26,7 +26,7 @@ function t.get_options(e)
     return e[1]
 end
 
-function t.get_cotent(e)
+function t.get_content(e)
     return e[2]
 end
 

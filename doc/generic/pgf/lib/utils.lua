@@ -98,7 +98,7 @@ function u.walk(sourcedir, targetdir, finder)
                 -- local options = e[1]
                 -- local content = e[2]
                 local options = finder.get_options(e)
-                local content = finder.get_cotent(e)
+                local content = finder.get_content(e)
                 -- if DEBUG then
                 --     print("options:", options)
                 --     print("content:", content)

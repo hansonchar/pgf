@@ -3,7 +3,7 @@ local C, Ct, P, V = lpeg.C, lpeg.Ct, lpeg.P, lpeg.V
 
 local t = {}
 
--- Grammar to extract code from example with a string only parameter
+-- Grammar to extract code from function call to "example" with a string parameter
 t.grammar =
     P {
     "example",
@@ -19,7 +19,7 @@ function t.get_options(_)
     return {}
 end
 
-function t.get_cotent(e)
+function t.get_content(e)
     return e[1]
 end
 
