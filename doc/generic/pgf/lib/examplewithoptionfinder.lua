@@ -1,4 +1,4 @@
-local UNIT_TESTING = true
+local UNIT_TESTING = false
 
 if UNIT_TESTING then
     local function pwd()
@@ -29,27 +29,54 @@ local function keyval(key, val)
     return result
 end
 
+-- local function sanitize(matches)
+--     if type(matches) == "table" then
+--         return matches
+--     else
+--         return {}
+--     end
+-- end
+
+-- local I =
+--     lpeg.P(
+--     function(_, i)
+--         print("I:", i)
+--         return true
+--     end
+-- )
+
 -- Grammar to extract code from function call to "example" with a table parameter
 t.grammar =
     P {
     "examplewithoptions",
-    examplewithoptions = V "anything" * V "example" ^ 0 * V "anything",
+    -- examplewithoptions = V "anything" * V "example" ^ 0 * V "anything" / sanitize,
+    examplewithoptions = V "anything" * (V "example") ^ 1 * V "anything",
     example = V "example_begin" * V "content" * V "example_end",
     example_begin = P "\n" ^ -1 * "example({" * SP,
     example_end = "\n})" * SP,
     -- content = C((1 - V "example_end") ^ 0),
-    content = V "options" ^ -1 * V "code",
+    content = Ct(V "options" ^ -1 * V "code"),
     anything = (1 - V "example") ^ 0,
     options = SP * C("options") * SP * "=" * str ^ -1 * (P ",") ^ -1 / keyval,
     code = SP * C("code") * SP * "=" * str / keyval
 }
 
-function t.get_options(_)
-    return {}
+local function preamble(options)
+    local p = SP * P "preamble" * SP * "=" * SP * C(P(1) ^ 1)
+    local matches = p:match(options)
+    local table = {}
+    if matches then
+        table.preamble = matches
+    end
+    return table
+end
+
+function t.get_options(e)
+    return preamble(e.options)
 end
 
 function t.get_content(e)
-    return e[1]
+    return e.code or ""
 end
 
 function t.get_name()
@@ -58,15 +85,22 @@ end
 
 if UNIT_TESTING then
     local tostring = require "ml".tstring
-    local mini_test_case =
-        [=[]
-example({
-  options = [[ foo ]],
-  code = [[
-    bar
-  ]]
-})
-]=]
+    local test_options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered} ]]
+    local p = SP * P "preamble" * SP * "=" * SP * C(P(1) ^ 1)
+    local matches = p:match(test_options)
+    print("type(matches)", type(matches))
+    print("to_string(p:match(test_options)):", tostring(p:match(test_options)))
+    -- os.exit()
+
+    -- local tostring = require "ml".tstring
+    --     local mini_test_case = [=[]
+    -- example({
+    --   options = [[ foo ]],
+    --   code = [[
+    --     bar
+    --   ]]
+    -- })
+    -- ]=]
     local test_case =
         [=[
 example({
@@ -81,14 +115,16 @@ example({
   ]]
 })
 ]=]
-    local captured = t.grammar:match(test_case)
+    matches = t.grammar:match(test_case)
     -- local result = t.grammar:match(mini_test_case)
-    print("captured:", captured)
-    -- print("tostring(result): ", tostring(captured))
-    print("captured.options:", captured.options)
-    print("captured.code:", captured.code)
-    print("result.options:", result.options)
-    print("result.code:", result.code)
+    -- print("captured:", captured)
+    -- print("tostring(result): ", tostring(matches[1]))
+    print("t.get_options(matches):", tostring(t.get_options(matches)))
+    print("t.get_content(matches):", t.get_content(matches))
+    -- print("captured.options:", captured.options)
+    -- print("captured.code:", captured.code)
+    -- print("result.options:", result.options)
+    -- print("result.code:", result.code)
     os.exit()
 end
 
