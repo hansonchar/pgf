@@ -53,6 +53,32 @@ finder.grammar =
   codekv = Cg(C("code") * SP * "=" * SP * str)
 }
 
+local function preamble(options)
+  local p = SP * P "preamble" * SP * "=" * SP * C(P(1) ^ 1)
+  local matches = p:match(options)
+  local table = {}
+  if matches then
+      table.preamble = matches
+  end
+  return table
+end
+
+function finder.get_options(e, matches)
+  return e.options and preamble(e.options) or matches.options and preamble(matches.options) or {}
+end
+
+function finder.get_content(e)
+  return e.code or ""
+end
+
+function finder.get_name()
+  return "examples"
+end
+
+if not UNIT_TESTING then
+  return finder
+end
+
 -- Unit tests and debugging
 
 local tostring = require "ml".tstring

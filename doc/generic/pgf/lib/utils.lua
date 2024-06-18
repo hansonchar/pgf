@@ -103,7 +103,7 @@ function u.walk(sourcedir, targetdir, finder)
             for n, e in ipairs(matches) do
                 -- local options = e[1]
                 -- local content = e[2]
-                local options = finder.get_options(e)
+                local options = finder.get_options(e, matches)
                 local content = finder.get_content(e)
                 -- if DEBUG then
                 --     print("options:", options)
