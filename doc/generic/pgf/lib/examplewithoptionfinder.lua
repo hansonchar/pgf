@@ -101,3 +101,5 @@ assert(
 ]]
         )
 )
+
+return finder

@@ -81,3 +81,5 @@ for _, s in ipairs(test_strings) do
         print("No match: " .. s)
     end
 end
+
+return matcher
