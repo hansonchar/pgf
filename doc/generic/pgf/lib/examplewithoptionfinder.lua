@@ -18,11 +18,10 @@ local SP = u.SP
 local str = require("stringmatcher")
 local C, P, V, Ct, Cf, Cg = lpeg.C, lpeg.P, lpeg.V, lpeg.Ct, lpeg.Cf, lpeg.Cg
 
-local t = {}
-
+local finder = {}
 
 -- Grammar to extract code from function call to "example" with a table parameter
-t.grammar =
+finder.grammar =
     P {
     "examplewithoptions",
     examplewithoptions = V "anything" * (V "example") ^ 1 * V "anything",
@@ -47,27 +46,32 @@ local function preamble(options)
     return table
 end
 
-function t.get_options(e)
+function finder.get_options(e)
     return preamble(e.options)
 end
 
-function t.get_content(e)
+function finder.get_content(e)
     return e.code or ""
 end
 
-function t.get_name()
+function finder.get_name()
     return "exopt"
 end
 
-if UNIT_TESTING then
-    local tostring = require "ml".tstring
-    local test_options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered} ]]
-    local p = SP * P "preamble" * SP * "=" * SP * C(P(1) ^ 1)
-    local matches = p:match(test_options)
-    assert(matches == [[\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered} ]])
+if not UNIT_TESTING then
+    return finder
+end
 
-    local test_case =
-        [=[
+-- Unit tests and debugging
+
+local tostring = require "ml".tstring
+local test_options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered} ]]
+local p = SP * P "preamble" * SP * "=" * SP * C(P(1) ^ 1)
+local matches = p:match(test_options)
+assert(matches == [[\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered} ]])
+
+local test_case =
+    [=[
 example({
   options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered} ]],
   code = [[
@@ -80,14 +84,14 @@ example({
   ]]
 })
 ]=]
-    matches = t.grammar:match(test_case)
-    assert(#matches == 1)
-    local e = matches[1]
-    assert(tostring(t.get_options(e)) == [[{preamble="\\usetikzlibrary{graphs,graphdrawing} \\usegdlibrary{layered"}]])
-    assert(
-        u.strip(t.get_content(e)) ==
-            u.strip(
-                [[
+matches = finder.grammar:match(test_case)
+assert(#matches == 1)
+local e = matches[1]
+assert(tostring(finder.get_options(e)) == [[{preamble="\\usetikzlibrary{graphs,graphdrawing} \\usegdlibrary{layered"}]])
+assert(
+    u.strip(finder.get_content(e)) ==
+        u.strip(
+            [[
    \begin{tikzpicture}
       \draw [help lines] (0,0) grid (2,2);
 
@@ -95,8 +99,5 @@ example({
         { a -- {b, c [anchor here] } -- d -- a};
     \end{tikzpicture
 ]]
-            )
-    )
-end
-
-return t
+        )
+)

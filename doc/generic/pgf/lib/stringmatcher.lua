@@ -5,9 +5,8 @@ local C, P, V = lpeg.C, lpeg.P, lpeg.V
 local loc = lpeg.locale()
 local SP = loc.space ^ 0 -- spaces
 
--- Combine all patterns into one general pattern
--- local general_str = single_quoted + double_quoted + multiline
-
+-- Used to match a string which can be single-quoted, double-quoted or multi-line
+-- surrounded by inside double square brackets.
 local string_matcher =
     P {
     "str",
