@@ -4,6 +4,25 @@ local C, P, V = lpeg.C, lpeg.P, lpeg.V
 
 local loc = lpeg.locale()
 local SP = loc.space ^ 0 -- spaces
+
+-- Combine all patterns into one general pattern
+-- local general_str = single_quoted + double_quoted + multiline
+
+local string_matcher =
+    P {
+    "str",
+    single_quoted = SP * "'" * C(((1 - P "'") + "\\'") ^ 0) * "'",
+    double_quoted = SP * '"' * C(((1 - P '"') + '\\"') ^ 0) * '"',
+    multiline = SP * "[[" * C((1 - (SP * P "]]")) ^ 0) * SP * "]]",
+    str = V "single_quoted" + V "double_quoted" + V "multiline"
+}
+
+if not UNIT_TESTING then
+    return string_matcher
+end
+
+-- Unit tests and debugging
+
 -- local I = function(tag)
 --     return lpeg.P(
 --         function()
@@ -13,7 +32,7 @@ local SP = loc.space ^ 0 -- spaces
 --     )
 -- end
 
-if UNIT_TESTING then
+do
     -- Define patterns for single-quoted and double-quoted strings
     local single_quoted = SP * "'" * C(((1 - P "'") + "\\'") ^ 0) * "'"
 
@@ -36,22 +55,6 @@ if UNIT_TESTING then
         testing second line
     ]]
     ]=]))
-end
-
--- Combine all patterns into one general pattern
--- local general_str = single_quoted + double_quoted + multiline
-
-local string_matcher =
-    P {
-    "str",
-    single_quoted = SP * "'" * C(((1 - P "'") + "\\'") ^ 0) * "'",
-    double_quoted = SP * '"' * C(((1 - P '"') + '\\"') ^ 0) * '"',
-    multiline = SP * "[[" * C((1 - (SP * P "]]")) ^ 0) * SP * "]]",
-    str = V "single_quoted" + V "double_quoted" + V "multiline"
-}
-
-if not UNIT_TESTING then
-    return string_matcher
 end
 
 -- Test strings
