@@ -13,13 +13,13 @@ if UNIT_TESTING then
 end
 
 local lpeg = require("lpeg")
-local loc = lpeg.locale()
 local u = require("utils")
+local SP = u.SP
 local str = require("stringmatcher")
-local C, Ct, P, V = lpeg.C, lpeg.Ct, lpeg.P, lpeg.V
+local C, P, V, Ct, Cf, Cg = lpeg.C, lpeg.P, lpeg.V, lpeg.Ct, lpeg.Cf, lpeg.Cg
 
 local t = {}
-local SP = loc.space ^ 0
+
 
 -- Grammar to extract code from function call to "example" with a table parameter
 t.grammar =
@@ -29,12 +29,12 @@ t.grammar =
     example = V "example_begin" * V "content" * V "example_end",
     example_begin = P "\n" ^ -1 * "example({" * SP,
     example_end = "\n})" * SP,
-    content = Ct(lpeg.Cf(Ct "" * V "options" ^ -1 * V "code", u.set)),
+    content = Ct(Cf(Ct "" * V "options" ^ -1 * V "code", u.set)),
     anything = (1 - V "example") ^ 0,
     options = SP * (V "optionskv") ^ -1 * (P ",") ^ -1,
-    optionskv = lpeg.Cg(C("options") * SP * "=" * str),
+    optionskv = Cg(C("options") * SP * "=" * str),
     code = SP * V "codekv",
-    codekv = lpeg.Cg(C("code") * SP * "=" * str)
+    codekv = Cg(C("code") * SP * "=" * str)
 }
 
 local function preamble(options)
@@ -97,7 +97,6 @@ example({
 ]]
             )
     )
-    os.exit()
 end
 
 return t

@@ -23,8 +23,14 @@ function u.strip_braces(str)
     return str:match "^{?(.-)}?$"
 end
 
+local loc = lpeg.locale()
+
 -- optional whitespace
-u.ws = lpeg.S " \t\n\r" ^ 0
+u.SP = loc.space ^ 0
+
+-- for backward compatibility
+-- u.ws = lpeg.S " \t\n\r" ^ 0
+u.ws = u.SP
 
 -- match string literal
 function u.lit(str)
