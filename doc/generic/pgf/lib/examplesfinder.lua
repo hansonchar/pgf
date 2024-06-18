@@ -27,8 +27,7 @@ local I =
 
 local finder = {}
 
--- local tostring = require "ml".tstring
-
+-- Reorganize the captured result into a nicer form
 local function reorg(table, k, v, ...)
   if type(k) == "string" then
     u.set(table, k, u.strip(v))
@@ -45,8 +44,7 @@ finder.grammar =
   P {
   "examples",
   examples = SP * "examples" * SP * "=" * SP * "{" * SP * V "content" * SP * "}",
-  content = Cf(Ct"" * Cg(V("options") ^ -1 * Ct(V("exentry") ^ 1)), reorg),
-  -- content = Ct(V("options") ^ -1 * V("exentry") ^ 1),
+  content = Cf(Ct "" * Cg(V("options") ^ -1 * Ct(V("exentry") ^ 1)), reorg),
   options = V "optionskv" * P(",") ^ -1,
   optionskv = Cg(C("options") * SP * "=" * SP * str),
   exentry = SP * "{" * SP * V "excontent" * SP * "}" * P(",") ^ -1,
@@ -82,7 +80,12 @@ local test_case =
 ]=]
 
 local matches = finder.grammar:match(test_case)
-print(tostring(matches))
+-- print(tostring(matches))
+assert(matches.options == "top level options")
+assert(u.strip(matches[1].options) == "first entry options")
+assert(u.strip(matches[1].code) == "first entry code")
+assert(not matches[2].options)
+assert(u.strip(matches[2].code) == "second entry code")
 -- local p = SP * P"examples" * SP * P"=" * SP *
 --     P"{" * SP * (P"options" * SP * P"=" * SP * str) ^ -1 * SP * P(",")^-1 * SP * I * P"}"
 -- local matches = p:match(test_case)
