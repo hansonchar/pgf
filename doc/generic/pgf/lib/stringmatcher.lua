@@ -7,7 +7,7 @@ local SP = loc.space ^ 0 -- spaces
 
 -- Used to match a string which can be single-quoted, double-quoted or multi-line
 -- surrounded by inside double square brackets.
-local string_matcher =
+local matcher =
     P {
     "str",
     single_quoted = SP * "'" * C(((1 - P "'") + "\\'") ^ 0) * "'",
@@ -17,7 +17,7 @@ local string_matcher =
 }
 
 if not UNIT_TESTING then
-    return string_matcher
+    return matcher
 end
 
 -- Unit tests and debugging
@@ -74,7 +74,7 @@ local test_strings = {
 for _, s in ipairs(test_strings) do
     -- local match = lpeg.match(general_str, s)
     -- local match = general_str:match(s)
-    local match = string_matcher:match(s)
+    local match = matcher:match(s)
     if match then
         print("Match found: " .. match)
     else

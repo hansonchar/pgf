@@ -1,10 +1,10 @@
 local lpeg = require("lpeg")
 local C, Ct, P, V = lpeg.C, lpeg.Ct, lpeg.P, lpeg.V
 
-local t = {}
+local finder = {}
 
 -- Grammar to extract code from function call to "example" with a string parameter
-t.grammar =
+finder.grammar =
     P {
     "example",
     begincodeexample = P "\n" ^ -1 * "example\n[[",
@@ -15,16 +15,16 @@ t.grammar =
     example = V "anything" * Ct(V "codeexample" * (V "anything" * V "codeexample") ^ 0) * V "anything"
 }
 
-function t.get_options(_)
+function finder.get_options(_)
     return {}
 end
 
-function t.get_content(e)
+function finder.get_content(e)
     return e[1]
 end
 
-function t.get_name()
+function finder.get_name()
     return "example"
 end
 
-return t
+return finder
