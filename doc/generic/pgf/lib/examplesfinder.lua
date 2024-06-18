@@ -27,11 +27,17 @@ local I =
 
 local finder = {}
 
-local function reorg(t, k, v)
+-- local tostring = require "ml".tstring
+
+local function reorg(table, k, v, ...)
   if type(k) == "string" then
-    u.set(t, k, v)
+    u.set(table, k, u.strip(v))
   end
-  return t
+  for i, t in ipairs(...) do
+    -- print("Argument " .. i .. ": " .. tostring(t))
+    table[i] = t
+  end
+  return table
 end
 
 -- Grammar to extract code from function call to "example" with a table parameter
@@ -39,8 +45,8 @@ finder.grammar =
   P {
   "examples",
   examples = SP * "examples" * SP * "=" * SP * "{" * SP * V "content" * SP * "}",
-  -- content = Cf(Ct"" * Cg(V("options") ^ -1 * Ct(V("exentry") ^ 1)), reorg),
-  content = Ct(V("options") ^ -1 * V("exentry") ^ 1),
+  content = Cf(Ct"" * Cg(V("options") ^ -1 * Ct(V("exentry") ^ 1)), reorg),
+  -- content = Ct(V("options") ^ -1 * V("exentry") ^ 1),
   options = V "optionskv" * P(",") ^ -1,
   optionskv = Cg(C("options") * SP * "=" * SP * str),
   exentry = SP * "{" * SP * V "excontent" * SP * "}" * P(",") ^ -1,
