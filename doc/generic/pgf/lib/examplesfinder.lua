@@ -17,33 +17,47 @@ local u = require("utils")
 local SP = u.SP
 local str = require("stringmatcher")
 local C, P, V, Ct, Cf, Cg = lpeg.C, lpeg.P, lpeg.V, lpeg.Ct, lpeg.Cf, lpeg.Cg
-local I =
-  lpeg.P(
-  function(_, i)
-    print("I:", i)
-    return true
-  end
-)
+-- local I =
+--   lpeg.P(
+--   function(_, i)
+--     print("I:", i)
+--     return true
+--   end
+-- )
 
 local finder = {}
 
 -- Reorganize the captured result into a nicer form
-local function reorg(table, k, v, ...)
-  if type(k) == "string" then
-    u.set(table, k, u.strip(v))
+local function reorg(result, ...)
+  local fallback_options = select(1, ...) == "options" and u.strip(select(2, ...)) or nil
+  for _, item in ipairs({...}) do
+    if type(item) == "table" then
+      for i, entry in ipairs(item) do
+        result[i] = {
+          options = entry.options or fallback_options,
+          code = entry.code
+        }
+      end
+    end
   end
-  for i, t in ipairs(...) do
-    -- print("Argument " .. i .. ": " .. tostring(t))
-    table[i] = t
-  end
-  return table
+  return result
 end
 
--- Grammar to extract code from function call to "example" with a table parameter
+local tostring = require "ml".tstring
+
+-- local function peek(x)
+--   print("peek: ", tostring(x))
+--   return x
+-- end
+
+-- Grammar to extract code from a table assignment to "examples"
 finder.grammar =
   P {
   "examples",
-  examples = SP * "examples" * SP * "=" * SP * "{" * SP * V "content" * SP * "}",
+  examples = V "anything" * Ct(V "pattern" * (V "anything" * V "pattern") ^ 0),
+  anything = (1 - V "pattern") ^ 0,
+  pattern = SP * "examples" * SP * "=" * SP * "{" * SP * V "content" * SP * "}",
+  -- content = Cf(Ct "" * Cg(V("options") ^ -1 * Ct(V("exentry") ^ 1)), reorg) / peek,
   content = Cf(Ct "" * Cg(V("options") ^ -1 * Ct(V("exentry") ^ 1)), reorg),
   options = V "optionskv" * P(",") ^ -1,
   optionskv = Cg(C("options") * SP * "=" * SP * str),
@@ -58,7 +72,7 @@ local function preamble(options)
   local matches = p:match(options)
   local table = {}
   if matches then
-      table.preamble = matches
+    table.preamble = matches
   end
   return table
 end
@@ -81,17 +95,7 @@ end
 
 -- Unit tests and debugging
 
-local tostring = require "ml".tstring
--- local test_case = [=[
---   examples = {
---     options = [[ top level options ]],
---     {
---       options = [[ first entry options ]],
---       code = [[ first entry code ]]
---     },
---   }
--- ]=]
-local test_case =
+local test_case1 =
   [=[
   examples = {
     options = [[ top level options ]],
@@ -104,14 +108,29 @@ local test_case =
     }
   }
 ]=]
+local test_case2 =
+  [=[
+  examples = {
+    {
+      options = [[ first entry options ]],
+      code = [[ first entry code ]]
+    },
+    {
+      code = [[ second entry code]]
+    }
+  }
+]=]
 
-local matches = finder.grammar:match(test_case)
--- print(tostring(matches))
-assert(matches.options == "top level options")
-assert(u.strip(matches[1].options) == "first entry options")
-assert(u.strip(matches[1].code) == "first entry code")
-assert(not matches[2].options)
-assert(u.strip(matches[2].code) == "second entry code")
+local matches = finder.grammar:match(test_case1)
+print(tostring(matches))
+os.exit()
+assert(#matches == 1)
+local e = matches[1]
+assert(e.options == "top level options")
+assert(u.strip(e[1].options) == "first entry options")
+assert(u.strip(e[1].code) == "first entry code")
+assert(not e[2].options)
+assert(u.strip(e[2].code) == "second entry code")
 -- local p = SP * P"examples" * SP * P"=" * SP *
 --     P"{" * SP * (P"options" * SP * P"=" * SP * str) ^ -1 * SP * P(",")^-1 * SP * I * P"}"
 -- local matches = p:match(test_case)
