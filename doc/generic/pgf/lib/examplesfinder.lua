@@ -188,7 +188,9 @@ local test_case3 =
 
 do
   local matches = finder.grammar:match(test_case3)
-  print(tostring(matches))
+  for i, e in ipairs(matches) do
+    print(i, tostring(e))
+  end
 end
 
 return finder
