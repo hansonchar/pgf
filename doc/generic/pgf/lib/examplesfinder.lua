@@ -25,6 +25,8 @@ local C, P, V, Ct, Cf, Cg = lpeg.C, lpeg.P, lpeg.V, lpeg.Ct, lpeg.Cf, lpeg.Cg
 --   end
 -- )
 
+local tostring = require "ml".tstring
+
 local finder = {}
 
 -- Reorganize the captured result into a nicer form
@@ -40,23 +42,34 @@ local function reorg(result, ...)
       end
     end
   end
+  -- return table.unpack(result)
+  print("reorg/tostring(result):", tostring(result))
+  -- print("reorg/table.unpack(result):", table.unpack(result))
   return result
 end
 
-local tostring = require "ml".tstring
+local function peek(...)
+  print("peek/captured: ", tostring(...))
+  return ...
+end
 
--- local function peek(x)
---   print("peek: ", tostring(x))
---   return x
--- end
+local function flatten(captured)
+  local result = {}
+  for _, examples in ipairs(captured) do
+    for _, example in ipairs(examples) do
+      result[#result+1] = example
+    end
+  end
+  return result
+end
 
 -- Grammar to extract code from a table assignment to "examples"
 finder.grammar =
   P {
   "examples",
-  examples = V "anything" * Ct(V "pattern" * (V "anything" * V "pattern") ^ 0),
+  examples = V "anything" * Ct(V "pattern" * (V "anything" * V "pattern") ^ 0) / flatten,
   anything = (1 - V "pattern") ^ 0,
-  pattern = SP * "examples" * SP * "=" * SP * "{" * SP * V "content" * SP * "}",
+  pattern = SP * "examples" * SP * "=" * SP * "{" * SP * V "content" * SP * "}" / peek,
   -- content = Cf(Ct "" * Cg(V("options") ^ -1 * Ct(V("exentry") ^ 1)), reorg) / peek,
   content = Cf(Ct "" * Cg(V("options") ^ -1 * Ct(V("exentry") ^ 1)), reorg),
   options = V "optionskv" * P(",") ^ -1,
@@ -107,6 +120,15 @@ local test_case1 =
       code = [[ second entry code]]
     }
   }
+
+  examples = {
+    {
+      code = [[ another example first entry ]]
+    },
+    {
+      code = [[ another example second entry]]
+    }
+  }
 ]=]
 local test_case2 =
   [=[
@@ -119,10 +141,18 @@ local test_case2 =
       code = [[ second entry code]]
     }
   }
-]=]
+ ]=]
+
+-- local t = {{1},{2},{3}}
+-- print("table.unpack(t):", table.unpack(t))
+-- print("tostring(table.unpack(t)):", tostring(table.unpack(t)))
+-- os.exit()
 
 local matches = finder.grammar:match(test_case1)
-print(tostring(matches))
+print("tostring(matches):", tostring(matches))
+for n, e in ipairs(matches) do
+  print("tostring(e):", tostring(e))
+end
 os.exit()
 assert(#matches == 1)
 local e = matches[1]
