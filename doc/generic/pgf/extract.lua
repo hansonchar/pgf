@@ -38,25 +38,25 @@ if #arg < 2 then
     os.exit(1)
 end
 
--- -- Extract code exmples from documentation
--- for n = 1, #arg - 1 do
---     utils.walk(arg[n], arg[#arg], documentfinder)
--- end
+-- Extract code exmples from documentation
+for n = 1, #arg - 1 do
+    utils.walk(arg[n], arg[#arg], documentfinder)
+end
 
--- -- Extract code exmples from string parameter passed to the example function
--- for n = 1, #arg - 1 do
---     utils.walk(arg[n], arg[#arg], examplefinder)
--- end
+-- Extract code exmples from string parameter passed to the example function
+for n = 1, #arg - 1 do
+    utils.walk(arg[n], arg[#arg], examplefinder)
+end
 
--- -- Extract code exmples from table parameter passed to the example function
--- for n = 1, #arg - 1 do
---     utils.walk(arg[n], arg[#arg], exoptfinder)
--- end
+-- Extract code exmples from table parameter passed to the example function
+for n = 1, #arg - 1 do
+    utils.walk(arg[n], arg[#arg], exoptfinder)
+end
 
 -- Extract code exmples from examples being assigned as a table
-for n = 1, #arg - 1 do
-    utils.walk(arg[n], arg[#arg], examplesfinder)
-end
+-- for n = 1, #arg - 1 do
+--     utils.walk(arg[n], arg[#arg], examplesfinder)
+-- end
 
 -- utils.walk("/Users/hchar/tmp/from", "/Users/hchar/tmp/mwe", exoptfinder)
 os.exit(0)

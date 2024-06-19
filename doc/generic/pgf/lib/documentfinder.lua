@@ -22,7 +22,7 @@ finder.grammar =
     document = V "anything" * Ct(V "codeexample" * (V "anything" * V "codeexample") ^ 0) * V "anything"
 }
 
-function finder.get_options(e, _)
+function finder.get_options(e)
     return e[1]
 end
 

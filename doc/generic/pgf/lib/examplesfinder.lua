@@ -25,7 +25,7 @@ local C, P, V, Ct, Cf, Cg = lpeg.C, lpeg.P, lpeg.V, lpeg.Ct, lpeg.Cf, lpeg.Cg
 --   end
 -- )
 
-local tostring = require "ml".tstring
+local tostring = UNIT_TESTING and require "ml".tstring or nil
 
 local finder = {}
 
@@ -43,13 +43,13 @@ local function reorg(result, ...)
     end
   end
   -- return table.unpack(result)
-  print("reorg/tostring(result):", tostring(result))
+  -- print("reorg/tostring(result):", tostring(result))
   -- print("reorg/table.unpack(result):", table.unpack(result))
   return result
 end
 
 local function peek(...)
-  print("peek/captured: ", tostring(...))
+  -- print("peek/captured: ", tostring(...))
   return ...
 end
 
@@ -57,7 +57,7 @@ local function flatten(captured)
   local result = {}
   for _, examples in ipairs(captured) do
     for _, example in ipairs(examples) do
-      result[#result+1] = example
+      result[#result + 1] = example
     end
   end
   return result
@@ -70,7 +70,6 @@ finder.grammar =
   examples = V "anything" * Ct(V "pattern" * (V "anything" * V "pattern") ^ 0) / flatten,
   anything = (1 - V "pattern") ^ 0,
   pattern = SP * "examples" * SP * "=" * SP * "{" * SP * V "content" * SP * "}" / peek,
-  -- content = Cf(Ct "" * Cg(V("options") ^ -1 * Ct(V("exentry") ^ 1)), reorg) / peek,
   content = Cf(Ct "" * Cg(V("options") ^ -1 * Ct(V("exentry") ^ 1)), reorg),
   options = V "optionskv" * P(",") ^ -1,
   optionskv = Cg(C("options") * SP * "=" * SP * str),
@@ -90,8 +89,8 @@ local function preamble(options)
   return table
 end
 
-function finder.get_options(e, matches)
-  return e.options and preamble(e.options) or matches.options and preamble(matches.options) or {}
+function finder.get_options(e)
+  return e.options and preamble(e.options) or {}
 end
 
 function finder.get_content(e)
@@ -107,8 +106,29 @@ if not UNIT_TESTING then
 end
 
 -- Unit tests and debugging
-
 local test_case1 =
+  [=[
+  examples = {
+    {
+      options = [[ first entry options ]],
+      code = [[ first entry code ]]
+    },
+    {
+      code = [[ second entry code]]
+    }
+  }
+]=]
+
+do
+  local matches = finder.grammar:match(test_case1)
+  assert(#matches == 2)
+  assert(u.strip(matches[1].code) == "first entry code")
+  assert(u.strip(matches[1].options) == "first entry options")
+  assert(u.strip(matches[2].code) == "second entry code")
+  assert(not matches[2].options)
+end
+
+local test_case2 =
   [=[
   examples = {
     options = [[ top level options ]],
@@ -130,57 +150,45 @@ local test_case1 =
     }
   }
 ]=]
-local test_case2 =
+
+do
+  local matches = finder.grammar:match(test_case2)
+  assert(#matches == 4)
+  assert(u.strip(matches[1].code) == "first entry code")
+  assert(u.strip(matches[1].options) == "first entry options")
+  assert(u.strip(matches[2].code) == "second entry code")
+  assert(u.strip(matches[2].options) == "top level options")
+  assert(u.strip(matches[3].code) == "another example first entry")
+  assert(not matches[3].options)
+  assert(u.strip(matches[4].code) == "another example second entry")
+  assert(not matches[4].options)
+end
+
+local test_case3 =
   [=[
   examples = {
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force}} ]],
+
     {
-      options = [[ first entry options ]],
-      code = [[ first entry code ]]
+      options = [["preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force}}"]],
+      code = [["
+        \tikz \graph [spring electrical layout, horizontal=0 to 1]
+          { 0 [electric charge=1] -- subgraph C_n [n=10] };
+      "]]
     },
+
     {
-      code = [[ second entry code]]
+      code = [["
+        \tikz \graph [spring electrical layout, horizontal=0 to 1]
+          { [clique] 1 [electric charge=5], 2, 3, 4 };
+      "]]
     }
   }
- ]=]
+]=]
 
--- local t = {{1},{2},{3}}
--- print("table.unpack(t):", table.unpack(t))
--- print("tostring(table.unpack(t)):", tostring(table.unpack(t)))
--- os.exit()
-
-local matches = finder.grammar:match(test_case1)
-print("tostring(matches):", tostring(matches))
-for n, e in ipairs(matches) do
-  print("tostring(e):", tostring(e))
+do
+  local matches = finder.grammar:match(test_case3)
+  print(tostring(matches))
 end
-os.exit()
-assert(#matches == 1)
-local e = matches[1]
-assert(e.options == "top level options")
-assert(u.strip(e[1].options) == "first entry options")
-assert(u.strip(e[1].code) == "first entry code")
-assert(not e[2].options)
-assert(u.strip(e[2].code) == "second entry code")
--- local p = SP * P"examples" * SP * P"=" * SP *
---     P"{" * SP * (P"options" * SP * P"=" * SP * str) ^ -1 * SP * P(",")^-1 * SP * I * P"}"
--- local matches = p:match(test_case)
--- print(tostring(matches))
-
--- assert(#matches == 1)
--- local e = matches[1]
--- assert(tostring(finder.get_options(e)) == [[{preamble="\\usetikzlibrary{graphs,graphdrawing} \\usegdlibrary{layered"}]])
--- assert(
---     u.strip(finder.get_content(e)) ==
---         u.strip(
---             [[
---    \begin{tikzpicture}
---       \draw [help lines] (0,0) grid (2,2);
-
---       \graph [layered layout, edges=rounded corners]
---         { a -- {b, c [anchor here] } -- d -- a};
---     \end{tikzpicture
--- ]]
---         )
--- )
 
 return finder

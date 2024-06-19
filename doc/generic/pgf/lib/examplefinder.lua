@@ -15,7 +15,7 @@ finder.grammar =
     example = V "anything" * Ct(V "codeexample" * (V "anything" * V "codeexample") ^ 0) * V "anything"
 }
 
-function finder.get_options(_, _)
+function finder.get_options(_)
     return {}
 end
 

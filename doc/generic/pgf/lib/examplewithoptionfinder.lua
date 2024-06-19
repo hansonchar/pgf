@@ -46,8 +46,8 @@ local function preamble(options)
     return table
 end
 
-function finder.get_options(e, _)
-    return preamble(e.options)
+function finder.get_options(e)
+    return e.options and preamble(e.options) or {}
 end
 
 function finder.get_content(e)
