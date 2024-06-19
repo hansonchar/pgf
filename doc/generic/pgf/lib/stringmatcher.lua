@@ -67,4 +67,18 @@ assert(matcher:match([=[
 ]=]) == "\n            line1\n            line2")
 assert(not matcher:match("not a string"))
 
+local string_in_string =
+[=[
+[["
+    \tikz \graph [spring electrical layout, horizontal=0 to 1]
+        { [clique] 1 [electric charge=5], 2, 3, 4 };
+"]]
+]=]
+local first_matches = matcher:match(string_in_string)
+print(first_matches)
+local second_matches = matcher:match(first_matches)
+print(second_matches)
+local third_matches = matcher:match(second_matches)
+print(third_matches)
+
 return matcher
