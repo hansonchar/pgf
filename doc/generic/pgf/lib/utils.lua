@@ -1,16 +1,73 @@
 local lfs = require "lfs"
 local lpeg = require "lpeg"
-local DEBUG = false
+local loc = lpeg.locale()
 
-if DEBUG then
+local UNIT_TESTING = false
+
+if UNIT_TESTING then
     local luarocks_path = os.getenv("HOME") .. "/.luarocks/share/lua/5.3/?.lua"
     package.path = package.path .. ";" .. luarocks_path
 end
-local tostring = DEBUG and require "ml".tstring or nil
+local tostring = UNIT_TESTING and require "ml".tstring or nil
+
+local function pwd()
+    local info = debug.getinfo(1, "S")
+    local path = info.source:match("@(.*)")
+    local dir = path:match("(.*[/\\])") or "./"
+    return dir
+end
+
+package.path = pwd() .. "?.lua;" .. package.path
+local stringmatcher = require "stringmatcher"
 
 -- luacheck:ignore 542 (Empty if branch.)
 local utils = {}
 local u = utils
+
+function u.get_string(s)
+    local inner = s
+    while inner do
+        inner = stringmatcher:match(s)
+        if inner then
+            s = inner
+        end
+    end
+    return s
+end
+
+if UNIT_TESTING then
+    local string_in_string =
+        [=[
+[["
+    \tikz \graph [spring electrical layout, horizontal=0 to 1]
+        { [clique] 1 [electric charge=5], 2, 3, 4 };
+"]]
+    ]=]
+    assert(
+        u.get_string(string_in_string) ==
+            [[
+
+    \tikz \graph [spring electrical layout, horizontal=0 to 1]
+        { [clique] 1 [electric charge=5], 2, 3, 4 };
+]]
+    )
+
+    local string_only =
+        [=[
+[[
+    \tikz \graph [spring electrical layout, horizontal=0 to 1]
+        { [clique] 1 [electric charge=5], 2, 3, 4 };
+]]
+    ]=]
+    -- print(u.get_string(string_only))
+    assert(
+        u.get_string(string_only) ==
+            [[
+
+    \tikz \graph [spring electrical layout, horizontal=0 to 1]
+        { [clique] 1 [electric charge=5], 2, 3, 4 };]]
+    )
+end
 
 utils.pathsep = package.config:sub(1, 1)
 
@@ -23,14 +80,18 @@ function u.strip_braces(str)
     return str:match "^{?(.-)}?$"
 end
 
-local loc = lpeg.locale()
-
 -- optional whitespace
-u.SP = loc.space ^ 0
+u.SP = (loc.space + lpeg.P "\r") ^ 0
 
 -- for backward compatibility
 -- u.ws = lpeg.S " \t\n\r" ^ 0
 u.ws = u.SP
+
+if UNIT_TESTING then
+    local crlf = "\n\r"
+    assert(loc.space:match(crlf) == 2)
+    assert(u.SP:match(crlf) == 3)
+end
 
 -- match string literal
 function u.lit(str)
@@ -93,7 +154,7 @@ function u.walk(sourcedir, targetdir, finder)
             -- extract all code examples
             local matches = finder.grammar:match(text) or {}
 
-            if DEBUG then
+            if UNIT_TESTING then
                 print("matches:", matches)
                 print("tostring(matches):", tostring(matches))
             end

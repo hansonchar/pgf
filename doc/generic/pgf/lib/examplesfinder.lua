@@ -1,4 +1,4 @@
-local UNIT_TESTING = true
+local UNIT_TESTING = false
 
 if UNIT_TESTING then
   local function pwd()
@@ -81,7 +81,7 @@ finder.grammar =
 
 local function preamble(options)
   local p = SP * P "preamble" * SP * "=" * SP * C(P(1) ^ 1)
-  local matches = p:match(options)
+  local matches = p:match(u.get_string(options))
   local table = {}
   if matches then
     table.preamble = matches
@@ -94,7 +94,7 @@ function finder.get_options(e)
 end
 
 function finder.get_content(e)
-  return e.code or ""
+  return e.code and u.get_string(e.code) or ""
 end
 
 function finder.get_name()
