@@ -103,41 +103,47 @@ nodes can ``move freely''.
 %    \usetikzlibrary{graphs,graphdrawing}
 %    \usegdlibrary{force}
 --]]
-example
-[[
-\begin{tikzpicture}
-  \draw [help lines] (0,0) grid (3,2);
-  \graph [spring layout]
-  {
-    a[x=1] -- { b, c, d, e -- {f,g,h} };
-    { h, g } -- a;
-  };
-\end{tikzpicture}
-]]
+example({
+  options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force} ]],
+  code = [[
+    \begin{tikzpicture}
+      \draw [help lines] (0,0) grid (3,2);
+      \graph [spring layout]
+      {
+        a[x=1] -- { b, c, d, e -- {f,g,h} };
+        { h, g } -- a;
+      };
+    \end{tikzpicture}
+  ]]
+})
 
-example
-[[
-\begin{tikzpicture}
-  \draw [help lines] (0,0) grid (3,2);
-  \graph [spring layout]
-  {
-    a -- { b, c, d[x=0], e -- {f[x=2], g, h[x=1]} };
-    { h, g } -- a;
-  };
-\end{tikzpicture}
-]]
+example({
+  options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force} ]],
+  code = [[
+    \begin{tikzpicture}
+      \draw [help lines] (0,0) grid (3,2);
+      \graph [spring layout]
+      {
+        a -- { b, c, d[x=0], e -- {f[x=2], g, h[x=1]} };
+        { h, g } -- a;
+      };
+    \end{tikzpicture}
+  ]]
+})
 
-example
-[[
-\begin{tikzpicture}
-  \draw [help lines] (0,0) grid (3,2);
-  \graph [spring layout]
-  {
-    a -- { b, c, d[x=0], e -- {f[x=2,y=1], g, h[x=1]} };
-    { h, g } -- a;
-  };
-\end{tikzpicture}
-]]
+example({
+  options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force} ]],
+  code = [[
+  \begin{tikzpicture}
+    \draw [help lines] (0,0) grid (3,2);
+    \graph [spring layout]
+    {
+      a -- { b, c, d[x=0], e -- {f[x=2,y=1], g, h[x=1]} };
+      { h, g } -- a;
+    };
+  \end{tikzpicture}
+  ]]
+})
 --------------------------------------------------------------------
 
 
