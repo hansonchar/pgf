@@ -1,16 +1,17 @@
-local UNIT_TESTING = true
+local UNIT_TESTING = false
 
 if UNIT_TESTING then
-  local function pwd()
-    local info = debug.getinfo(1, "S")
-    local path = info.source:match("@(.*)")
-    local dir = path:match("(.*[/\\])") or "./"
-    return dir
-  end
-  package.path = pwd() .. "?.lua;" .. package.path
   local luarocks_path = os.getenv("HOME") .. "/.luarocks/share/lua/5.3/?.lua"
   package.path = package.path .. ";" .. luarocks_path
 end
+
+local function pwd()
+  local info = debug.getinfo(1, "S")
+  local path = info.source:match("@(.*)")
+  local dir = path:match("(.*[/\\])") or "./"
+  return dir
+end
+package.path = pwd() .. "?.lua;" .. package.path
 
 local lpeg = require("lpeg")
 local u = require("utils")
@@ -25,7 +26,7 @@ local C, P, V, Ct, Cf, Cg = lpeg.C, lpeg.P, lpeg.V, lpeg.Ct, lpeg.Cf, lpeg.Cg
 --   end
 -- )
 
-local tostring = UNIT_TESTING and require "ml".tstring or nil
+-- local tostring = UNIT_TESTING and require "ml".tstring or nil
 
 local finder = {}
 
@@ -189,9 +190,25 @@ local test_case3 =
 
 do
   local matches = finder.grammar:match(test_case3)
-  for i, e in ipairs(matches) do
-    print(i, tostring(e))
-  end
+  assert(#matches == 2)
+  assert(
+    u.strip(u.get_string(matches[1].code)) ==
+      [[\tikz \graph [spring electrical layout, horizontal=0 to 1]
+          { 0 [electric charge=1] -- subgraph C_n [n=10] };]]
+  )
+  assert(
+    u.strip(u.get_string(matches[1].options)) ==
+      [[preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force}}]]
+  )
+  assert(
+    u.strip(u.get_string(matches[2].code)) ==
+      [[\tikz \graph [spring electrical layout, horizontal=0 to 1]
+          { [clique] 1 [electric charge=5], 2, 3, 4 };]]
+  )
+  assert(
+    u.strip(u.get_string(matches[2].options)) ==
+      [[preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force}}]]
+  )
 end
 
 return finder

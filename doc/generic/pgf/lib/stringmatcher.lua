@@ -3,17 +3,29 @@ local lpeg = require("lpeg")
 local C, P, V = lpeg.C, lpeg.P, lpeg.V
 
 local loc = lpeg.locale()
-local SP = loc.space ^ 0 -- spaces
+local SP = (loc.space + lpeg.P "\r") ^ 0
+
+-- local function peek(...)
+--     return ...
+-- end
+
+-- local I =
+--   lpeg.P(
+--   function(_, i)
+--     print("I:", i)
+--     return true
+--   end
+-- )
 
 -- Used to match a string which can be single-quoted, double-quoted or multi-line
 -- surrounded by inside double square brackets.
 local matcher =
     P {
     "str",
+    str = V "multiline" + V "single_quoted" + V "double_quoted",
     single_quoted = SP * "'" * C(((1 - P "'") + "\\'") ^ 0) * "'",
     double_quoted = SP * '"' * C(((1 - P '"') + '\\"') ^ 0) * '"',
     multiline = SP * "[[" * C((1 - (SP * P "]]")) ^ 0) * SP * "]]",
-    str = V "single_quoted" + V "double_quoted" + V "multiline"
 }
 
 if not UNIT_TESTING then
@@ -21,15 +33,6 @@ if not UNIT_TESTING then
 end
 
 -- Unit tests and debugging
-
--- local I = function(tag)
---     return lpeg.P(
---         function()
---             print(tag)
---             return true
---         end
---     )
--- end
 
 do
     -- Define patterns for single-quoted and double-quoted strings

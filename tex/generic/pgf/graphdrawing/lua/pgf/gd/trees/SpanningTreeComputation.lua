@@ -237,7 +237,7 @@ declare {
     preferred in the computation of the spanning tree, but use
     |no span edge| to cause the algorithm to ignore these edges.
   "]],
-  examples = [["
+  examples = [['
     \tikz \graph [tree layout, nodes={draw}, sibling distance=0pt,
                   every group/.style={
                     default edge kind=->, no span edge,
@@ -250,7 +250,7 @@ declare {
         }
       }
     };
-  "]]
+  ']]
 }
 
 

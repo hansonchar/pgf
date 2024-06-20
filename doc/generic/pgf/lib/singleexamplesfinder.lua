@@ -1,15 +1,15 @@
-local UNIT_TESTING = true
+local UNIT_TESTING = false
 local function pwd()
-    local info = debug.getinfo(1, "S")
-    local path = info.source:match("@(.*)")
-    local dir = path:match("(.*[/\\])") or "./"
-    return dir
+  local info = debug.getinfo(1, "S")
+  local path = info.source:match("@(.*)")
+  local dir = path:match("(.*[/\\])") or "./"
+  return dir
 end
 package.path = pwd() .. "?.lua;" .. package.path
 
 if UNIT_TESTING then
-    local luarocks_path = os.getenv("HOME") .. "/.luarocks/share/lua/5.3/?.lua"
-    package.path = package.path .. ";" .. luarocks_path
+  local luarocks_path = os.getenv("HOME") .. "/.luarocks/share/lua/5.3/?.lua"
+  package.path = package.path .. ";" .. luarocks_path
 end
 
 local lpeg = require("lpeg")
@@ -22,35 +22,35 @@ local Ct, P, V = lpeg.Ct, lpeg.P, lpeg.V
 local finder = {}
 
 local function peek(...)
-    -- print("peek/captured: ", tostring(...))
-    return ...
+  -- print("peek/captured: ", tostring(...))
+  return ...
 end
 
 -- Grammar to extract code from function call to "examples" with a string parameter
 finder.grammar =
-    P {
-    "examples",
-    examples = V "anything" * Ct(V "codeexample") / peek,
-    codeexample = V "begincodeexample" * str,
-    begincodeexample = (loc.space + lpeg.P "\r") ^ 1 * "examples" * SP * "=" * SP,
-    anything = (1 - V "codeexample") ^ 0
+  P {
+  "examples",
+  examples = V "anything" * Ct(V "codeexample"),
+  codeexample = V "begincodeexample" * str,
+  begincodeexample = (loc.space + lpeg.P "\r") ^ 1 * "examples" * SP * "=" * SP,
+  anything = (1 - V "codeexample") ^ 0
 }
 
 function finder.get_options(_)
-    return {}
+  return {}
 end
 
 function finder.get_content(s)
-    assert(type(s) == "string")
-    return u.get_string(s)
+  assert(type(s) == "string")
+  return u.get_string(s)
 end
 
 function finder.get_name()
-    return "single"
+  return "single"
 end
 
 if not UNIT_TESTING then
-    return finder
+  return finder
 end
 
 local test_case1 = [=[
@@ -60,13 +60,13 @@ local test_case1 = [=[
 ]=]
 
 do
-    local matches = finder.grammar:match(test_case1)
-    assert(#matches == 1)
-    assert(u.strip(u.get_string(matches[1])) == "example code")
+  local matches = finder.grammar:match(test_case1)
+  assert(#matches == 1)
+  assert(u.strip(u.get_string(matches[1])) == "example code")
 end
 
 local test_case2 =
-    [=[
+  [=[
   examples = [["
     \begin{tikzpicture}
       \graph [simple necklace layout,  node distance=1cm, node sep=0pt,
@@ -82,11 +82,11 @@ local test_case2 =
 ]=]
 
 do
-    local matches = finder.grammar:match(test_case2)
-    assert(#matches == 1)
-    assert(
-        u.strip(u.get_string(matches[1])) ==
-            [[\begin{tikzpicture}
+  local matches = finder.grammar:match(test_case2)
+  assert(#matches == 1)
+  assert(
+    u.strip(u.get_string(matches[1])) ==
+      [[\begin{tikzpicture}
       \graph [simple necklace layout,  node distance=1cm, node sep=0pt,
               nodes={draw,circle,as=.}]
       {
@@ -96,12 +96,12 @@ do
       \draw [red,|-|] (1.center) -- ++(0:1cm);
       \draw [red,|-|] (5.center) -- ++(180:1cm);
     \end{tikzpicture}]]
-    )
+  )
 end
 
 local test_case3 =
-    [=[
-  examples = [["
+  [=[
+  examples = [['
     \tikz \graph [tree layout, nodes={draw}, sibling distance=0pt,
                   every group/.style={
                     default edge kind=->, no span edge,
@@ -114,13 +114,27 @@ local test_case3 =
         }
       }
     };
-  "]]
+  ']]
 ]=]
 
 do
-    local matches = finder.grammar:match(test_case3)
-    assert(#matches == 1)
-    print(u.strip(u.get_string(matches[1])))
+  local matches = finder.grammar:match(test_case3)
+  assert(#matches == 1)
+  assert(
+    u.strip(u.get_string(matches[1])) ==
+      [[\tikz \graph [tree layout, nodes={draw}, sibling distance=0pt,
+                  every group/.style={
+                    default edge kind=->, no span edge,
+                    path=source}]
+    {
+      5 -> {
+        "1,3" -> {0,2,4},
+        11    -> {
+          "7,9" -> { 6, 8, 10 }
+        }
+      }
+    };]]
+  )
 end
 
 return finder
