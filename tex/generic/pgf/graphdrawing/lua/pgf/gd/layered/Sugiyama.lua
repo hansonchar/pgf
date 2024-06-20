@@ -71,7 +71,9 @@ declare {
     routing. This will look visually quite pleasing if you add the
     |rounded corners| option:
   "]],
-  examples = {[["
+  examples = {
+    options = [[preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered}]],
+    [["
     \tikz \graph [layered layout, sibling distance=7mm]
     {
       a -> {
@@ -134,7 +136,7 @@ declare {
       { [same layer] a, b };
       { [same layer] d, e };
     };
-  "]],[["
+  "]],[['
       \tikz [rounded corners] \graph [layered layout] {
         1972 -> 1976 -> 1978 -> 1980 -> 1982 -> 1984 -> 1986 -> 1988 -> 1990 -> future;
 
@@ -162,7 +164,7 @@ declare {
           KornShell -> Perl
         }
       };
-  "]]
+  ']]
   }
 }
 
