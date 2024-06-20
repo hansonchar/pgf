@@ -53,11 +53,14 @@ declare {
     This behavior can be changed using this option. When the key is
     invoked, nodes are placed \emph{behind} the edges.
   "]],
-  examples = [["
-    \tikz \graph [simple necklace layout, nodes={draw,fill=white},
-                  nodes behind edges]
-      { subgraph K_n [n=7], 1 [regardless at={(0,-1)}] };
-  "]]
+  examples = {
+    options = [[ preamble=\usetikzlibrary{graphs.standard,graphdrawing} \usegdlibrary{circular,trees} ]],
+    [["
+      \tikz \graph [simple necklace layout, nodes={draw,fill=white},
+                    nodes behind edges]
+        { subgraph K_n [n=7], 1 [regardless at={(0,-1)}] };
+    "]]
+  }
 }
 
 
@@ -72,11 +75,14 @@ declare {
   summary = [["
     This is the default placement of edges: Behind the nodes.
   "]],
-  examples = [["
-    \tikz \graph [simple necklace layout, nodes={draw,fill=white},
-                  edges behind nodes]
-      { subgraph K_n [n=7], 1 [regardless at={(0,-1)}] };
- "]]
+  examples = {
+    options = [[ preamble=\usetikzlibrary{graphs.standard,graphdrawing} \usegdlibrary{circular,trees} ]],
+    [["
+      \tikz \graph [simple necklace layout, nodes={draw,fill=white},
+                    edges behind nodes]
+        { subgraph K_n [n=7], 1 [regardless at={(0,-1)}] };
+    "]]
+  }
 }
 
 ---
@@ -118,7 +124,7 @@ declare {
     will be as short as possible.
   "]],
   examples = {
-    options = [[preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered}]],
+    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered} ]],
     [["
       \tikz \graph [layered layout] {
         a -- {b,c,d} -- e -- a;
@@ -144,7 +150,7 @@ declare {
     into account when drawing a graph.
   "]],
   examples = {
-    options = [[preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{phylogenetics}]],
+    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{phylogenetics} ]],
     [["
       \tikz \graph [phylogenetic tree layout] {
         a --[length=2] b --[length=1] {c,d};
