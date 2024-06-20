@@ -117,15 +117,17 @@ declare {
     For instance, in a |layered layout|, an edge with a large |weight|
     will be as short as possible.
   "]],
-  examples = {[["
-    \tikz \graph [layered layout] {
-      a -- {b,c,d} -- e -- a;
-    };
-  "]],[["
-    \tikz \graph [layered layout] {
-      a -- {b,c,d} -- e --[weight=3] a;
-    };
- "]]
+  examples = {
+    options = [[preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered}]],
+    [["
+      \tikz \graph [layered layout] {
+        a -- {b,c,d} -- e -- a;
+      };
+    "]],[["
+      \tikz \graph [layered layout] {
+        a -- {b,c,d} -- e --[weight=3] a;
+      };
+  "]]
   }
 }
 
@@ -141,12 +143,14 @@ declare {
     Sets the ``length'' of an edge. Algorithms may take this value
     into account when drawing a graph.
   "]],
-  examples = {[["
-    \tikz \graph [phylogenetic tree layout] {
-      a --[length=2] b --[length=1] {c,d};
-      a --[length=3] e
-    };
-  "]],
+  examples = {
+    options = [[preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{phylogenetics}]],
+    [["
+      \tikz \graph [phylogenetic tree layout] {
+        a --[length=2] b --[length=1] {c,d};
+        a --[length=3] e
+      };
+    "]],
   }
 }
 

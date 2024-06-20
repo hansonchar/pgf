@@ -94,14 +94,16 @@ declare {
     front''. This make sense only for some algorithms, like for a
     simple necklace layout.
   "]],
-  examples = {[["
-    \tikz \graph [simple necklace layout, node distance=0cm, nodes={circle,draw}]
-      { 1--2--3--4--5--1 };
-  "]],[["
-    \tikz \graph [simple necklace layout, node distance=0cm, node sep=0mm,
-                  nodes={circle,draw}]
-      { 1--2--3[node pre sep=5mm]--4--5[node pre sep=1mm]--1 };
-  "]]
+  examples = {
+    options = [[preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{circular}]],
+    [["
+      \tikz \graph [simple necklace layout, node distance=0cm, nodes={circle,draw}]
+        { 1--2--3--4--5--1 };
+    "]],[["
+      \tikz \graph [simple necklace layout, node distance=0cm, node sep=0mm,
+                    nodes={circle,draw}]
+        { 1--2--3[node pre sep=5mm]--4--5[node pre sep=1mm]--1 };
+    "]]
   }
 }
 
@@ -278,18 +280,20 @@ declare {
     For some layouts, like a simple necklace layout, the \meta{length} is
     measured as the distance on the circle.
   "]],
-  examples = {[["
-    \tikz \graph [tree layout, sibling distance=1cm, nodes={circle,draw}]
-      { 1--{2,3,4,5} };
-  "]],[["
-    \tikz \graph [tree layout, sibling distance=0cm, sibling sep=0pt,
-                  nodes={circle,draw}]
-      { 1--{2,3,4,5} };
-  "]],[["
-    \tikz \graph [tree layout, sibling distance=0cm, sibling sep=0pt,
-                  nodes={circle,draw}]
-      { 1--{2,3[sibling distance=1cm],4,5} };
-  "]]
+  examples = {
+    options = [[preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees}]],
+    [["
+      \tikz \graph [tree layout, sibling distance=1cm, nodes={circle,draw}]
+        { 1--{2,3,4,5} };
+    "]],[["
+      \tikz \graph [tree layout, sibling distance=0cm, sibling sep=0pt,
+                    nodes={circle,draw}]
+        { 1--{2,3,4,5} };
+    "]],[["
+      \tikz \graph [tree layout, sibling distance=0cm, sibling sep=0pt,
+                    nodes={circle,draw}]
+        { 1--{2,3[sibling distance=1cm],4,5} };
+    "]]
   }
 }
 
@@ -412,25 +416,27 @@ declare {
     connected components will have when they are placed next to each
     other.
   "]],
-  examples = {[["
-    \tikz \graph [binary tree layout, sibling distance=4mm, level distance=8mm,
-                  components go right top aligned,
-                  component sep=1pt, nodes=draw]
-    {
-      1 -> 2 -> {3->4[second]->5,6,7};
-      a -> b[second] -> c[second] -> d -> e;
-      x -> y[second] -> z -> u[second] -> v;
-    };
-  "]],[["
-    \tikz \graph [binary tree layout, sibling distance=4mm, level distance=8mm,
-                  components go right top aligned,
-                  component sep=1em, nodes=draw]
-    {
-      1 -> 2 -> {3->4[second]->5,6,7};
-      a -> b[second] -> c[second] -> d -> e;
-      x -> y[second] -> z -> u[second] -> v;
-    };
-  "]]
+  examples = {
+    options = [[preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees}]],
+    [["
+      \tikz \graph [binary tree layout, sibling distance=4mm, level distance=8mm,
+                    components go right top aligned,
+                    component sep=1pt, nodes=draw]
+      {
+        1 -> 2 -> {3->4[second]->5,6,7};
+        a -> b[second] -> c[second] -> d -> e;
+        x -> y[second] -> z -> u[second] -> v;
+      };
+    "]],[["
+      \tikz \graph [binary tree layout, sibling distance=4mm, level distance=8mm,
+                    components go right top aligned,
+                    component sep=1em, nodes=draw]
+      {
+        1 -> 2 -> {3->4[second]->5,6,7};
+        a -> b[second] -> c[second] -> d -> e;
+        x -> y[second] -> z -> u[second] -> v;
+      };
+    "]]
   }
 }
 

@@ -69,19 +69,21 @@ declare {
     and so forth as \meta{direction} and also |up|, |down|, |left|, and
     |right|. Also, you can specify |-| for ``right'' and \verb!|! for ``down''.
   "]],
-  examples = {[["
-    \tikz \graph [spring layout]
-    {
-      a -- { b, c, d, e -- {f, g, h} };
-      h -- [orient=30] a;
-    };
-  "]],[["
-    \tikz \graph [spring layout]
-    {
-      a -- { b, c, d[> orient=right], e -- {f, g, h} };
-      h -- a;
-    };
-  "]]
+  examples = {
+    options = [[preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force}]],
+    [["
+      \tikz \graph [spring layout]
+      {
+        a -- { b, c, d, e -- {f, g, h} };
+        h -- [orient=30] a;
+      };
+    "]],[["
+      \tikz \graph [spring layout]
+      {
+        a -- { b, c, d[> orient=right], e -- {f, g, h} };
+        h -- a;
+      };
+    "]]
   }
 }
 
@@ -116,17 +118,19 @@ declare {
     Specifies the tail vertex for the orientation of a graph. See
     |orient| for details.
   "]],
-  examples = {[["
-    \tikz \graph [spring layout] {
-      a [orient=|, orient tail=f] -- { b, c, d, e -- {f, g, h} };
-      { h, g } -- a;
-    };
-  "]],[["
-    \tikz \graph [spring layout] {
-      a [orient=down, orient tail=h] -- { b, c, d, e -- {f, g, h} };
-      { h, g } -- a;
-    };
-  "]]
+  examples = {
+    options = [[preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force}]],
+    [["
+      \tikz \graph [spring layout] {
+        a [orient=|, orient tail=f] -- { b, c, d, e -- {f, g, h} };
+        { h, g } -- a;
+      };
+    "]],[["
+      \tikz \graph [spring layout] {
+        a [orient=down, orient tail=h] -- { b, c, d, e -- {f, g, h} };
+        { h, g } -- a;
+      };
+    "]]
   }
 }
 
@@ -144,17 +148,19 @@ declare {
     Specifies the head vertex for the orientation of a graph. See
     |orient| for details.
   "]],
-  examples = {[["
-    \tikz \graph [spring layout]
-    {
-      a [orient=|, orient head=f] -- { b, c, d, e -- {f, g, h} };
-      { h, g } -- a;
-    };
-  "]],[["
-    \tikz \graph [spring layout] { a -- b -- c -- a };
-    \tikz \graph [spring layout, orient=10,
-                  orient tail=a, orient head=b] { a -- b -- c -- a };
-  "]]
+  examples = {
+    options = [[preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force}]],
+    [["
+      \tikz \graph [spring layout]
+      {
+        a [orient=|, orient head=f] -- { b, c, d, e -- {f, g, h} };
+        { h, g } -- a;
+      };
+    "]],[["
+      \tikz \graph [spring layout] { a -- b -- c -- a };
+      \tikz \graph [spring layout, orient=10,
+                    orient tail=a, orient head=b] { a -- b -- c -- a };
+    "]]
   }
 }
 
@@ -169,10 +175,13 @@ declare {
     |orient=0|. The tail will be everything before the part ``| to |''
     and the head will be everything following it.
   "]],
-  examples = [["
-    \tikz \graph [spring layout]                    { a -- b -- c -- a };
-    \tikz \graph [spring layout, horizontal=a to b] { a -- b -- c -- a };
-  "]]
+  examples = {
+    options = [[preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force}]],
+    [["
+      \tikz \graph [spring layout]                    { a -- b -- c -- a };
+      \tikz \graph [spring layout, horizontal=a to b] { a -- b -- c -- a };
+    "]]
+  }
 }
 
 
@@ -257,26 +266,28 @@ declare {
     When you give the |grow=right| key to the graph as a whole, it will
     be applied to all nodes. This happens to be exactly what you want:
   "]],
-  examples = {[["
-    \tikz \graph [layered layout, sibling distance=5mm]
-    {
-      a [grow=right] -- { b, c, d, e -- {f, g, h} };
-      { h, g } -- a;
-    };
-  "]],[["
-    \tikz \graph [layered layout, grow=right, sibling distance=5mm]
-    {
-      a -- { b, c, d, e -- {f, g, h} };
-      { h, g } -- a;
-    };
-  "]],[["
-    \tikz
-      \graph [layered layout, grow=-80]
+  examples = {
+    options = [[preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered}]],
+    [["
+      \tikz \graph [layered layout, sibling distance=5mm]
       {
-        {a,b,c} --[complete bipartite] {e,d,f}
-                --[complete bipartite] {g,h,i};
+        a [grow=right] -- { b, c, d, e -- {f, g, h} };
+        { h, g } -- a;
       };
-  "]]
+    "]],[["
+      \tikz \graph [layered layout, grow=right, sibling distance=5mm]
+      {
+        a -- { b, c, d, e -- {f, g, h} };
+        { h, g } -- a;
+      };
+    "]],[["
+      \tikz
+        \graph [layered layout, grow=-80]
+        {
+          {a,b,c} --[complete bipartite] {e,d,f}
+                  --[complete bipartite] {g,h,i};
+        };
+    "]]
   }
 }
 
