@@ -54,9 +54,9 @@ for n = 1, #arg - 1 do
 end
 
 -- Extract code exmples from examples being assigned as a table
--- for n = 1, #arg - 1 do
---     utils.walk(arg[n], arg[#arg], examplesfinder)
--- end
+for n = 1, #arg - 1 do
+    utils.walk(arg[n], arg[#arg], examplesfinder)
+end
 
 -- utils.walk("/Users/hchar/tmp/from", "/Users/hchar/tmp/mwe", exoptfinder)
 os.exit(0)
