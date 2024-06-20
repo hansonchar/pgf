@@ -1,4 +1,4 @@
-local UNIT_TESTING = false
+local UNIT_TESTING = true
 local function pwd()
     local info = debug.getinfo(1, "S")
     local path = info.source:match("@(.*)")
@@ -97,6 +97,30 @@ do
       \draw [red,|-|] (5.center) -- ++(180:1cm);
     \end{tikzpicture}]]
     )
+end
+
+local test_case3 =
+    [=[
+  examples = [["
+    \tikz \graph [tree layout, nodes={draw}, sibling distance=0pt,
+                  every group/.style={
+                    default edge kind=->, no span edge,
+                    path=source}]
+    {
+      5 -> {
+        "1,3" -> {0,2,4},
+        11    -> {
+          "7,9" -> { 6, 8, 10 }
+        }
+      }
+    };
+  "]]
+]=]
+
+do
+    local matches = finder.grammar:match(test_case3)
+    assert(#matches == 1)
+    print(u.strip(u.get_string(matches[1])))
 end
 
 return finder
