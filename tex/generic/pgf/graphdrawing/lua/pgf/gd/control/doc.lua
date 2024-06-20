@@ -186,15 +186,17 @@ example
                     anchor node=y, anchor at={(2,0)}]          { x -> {y,z} };
 ]]
 
-example
-[[
-\begin{tikzpicture}
-  \draw [help lines] (0,0) grid (3,2);
+example({
+  options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered} ]],
+  code = [[
+    \begin{tikzpicture}
+      \draw [help lines] (0,0) grid (3,2);
 
-  \graph [layered layout, anchor node=c, edges=rounded corners]
-    { a -- {b [x=1,y=1], c [x=1,y=1] } -- d -- a};
-\end{tikzpicture}
-]]
+      \graph [layered layout, anchor node=c, edges=rounded corners]
+        { a -- {b [x=1,y=1], c [x=1,y=1] } -- d -- a};
+    \end{tikzpicture}
+  ]]
+})
 --------------------------------------------------------------------
 
 
@@ -209,15 +211,17 @@ The coordinate at which the graph should be anchored when no
 explicit anchor is given for any node. The initial value is the origin.
 ]]
 
-example
-[[
-\begin{tikzpicture}
-  \draw [help lines] (0,0) grid (2,2);
+example({
+  options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered} ]],
+  code = [[
+    \begin{tikzpicture}
+      \draw [help lines] (0,0) grid (2,2);
 
-  \graph [layered layout, edges=rounded corners, anchor at={(1,2)}]
-    { a -- {b, c [anchor here] } -- d -- a};
-\end{tikzpicture}
-]]
+      \graph [layered layout, edges=rounded corners, anchor at={(1,2)}]
+        { a -- {b, c [anchor here] } -- d -- a};
+    \end{tikzpicture}
+  ]]
+})
 --------------------------------------------------------------------
 
 
@@ -239,13 +243,15 @@ In the example, |c| is placed at the origin since this is the
 default |anchor at| position.
 ]]
 
-example
-[[
-\begin{tikzpicture}
-  \draw [help lines] (0,0) grid (2,2);
+example({
+  options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered} ]],
+  code = [[
+    \begin{tikzpicture}
+      \draw [help lines] (0,0) grid (2,2);
 
-  \graph [layered layout, edges=rounded corners]
-    { a -- {b, c [anchor here] } -- d -- a};
-\end{tikzpicture}
-]]
+      \graph [layered layout, edges=rounded corners]
+        { a -- {b, c [anchor here] } -- d -- a};
+    \end{tikzpicture}
+  ]]
+})
 --------------------------------------------------------------------
