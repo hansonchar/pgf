@@ -25,6 +25,16 @@ local finder = {}
 --     return ...
 -- end
 
+local function flatten(captured)
+    local result = {}
+    for _, examples in ipairs(captured) do
+        for _, example in ipairs(examples) do
+            result[#result + 1] = example
+        end
+    end
+    return result
+end
+
 local function set(t, k, v)
     -- strip whitespace from keys
     k = u.strip(k)
@@ -37,7 +47,7 @@ end
 finder.grammar =
     P {
     "examplewithoptions",
-    examplewithoptions = V "anything" * (V "example") ^ 1 * V "anything",
+    examplewithoptions = Ct((V "anything" * (V "example")) ^ 1) / flatten,
     example = V "example_begin" * V "content" * V "example_end",
     example_begin = P "\n" ^ -1 * "example({" * SP,
     example_end = "\n})" * SP,
@@ -77,7 +87,7 @@ end
 
 -- Unit tests and debugging
 
--- local tostring = require "ml".tstring
+-- local tostring = UNIT_TESTING and require "ml".tstring or nil
 
 local test_case1 =
     [=[
@@ -98,6 +108,7 @@ do
     local matches = finder.grammar:match(test_case1)
     assert(#matches == 1)
     local e = matches[1]
+    -- print("tostring(e.options)", tostring(e.options))
     assert(u.strip(finder.get_options(e).preamble) == [[\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered}]])
     assert(
         u.strip(finder.get_content(e)) ==
@@ -108,6 +119,27 @@ do
         { a -- {b, c [anchor here] } -- d -- a};
     \end{tikzpicture}]]
     )
+end
+
+local test_case2 =
+    [=[
+example({
+  options = [[ preamble=first example preamble ]],
+  code = [[ first example code ]]
+})
+
+example({
+  code = [[ second example code ]]
+})
+]=]
+
+do
+    local matches = finder.grammar:match(test_case2)
+    print("#matches:", #matches)
+    assert(u.strip(finder.get_options(matches[1]).preamble) == [[first example preamble]])
+    assert(u.strip(finder.get_content(matches[1])) == [[first example code]])
+    assert(not finder.get_options(matches[2]).preamble)
+    assert(u.strip(finder.get_content(matches[2])) == [[second example code]])
 end
 
 return finder
