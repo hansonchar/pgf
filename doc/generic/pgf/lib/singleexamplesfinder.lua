@@ -17,7 +17,7 @@ local loc = lpeg.locale()
 local u = require("utils")
 local SP = u.SP
 local str = require("stringmatcher")
-local C, Ct, P, V = lpeg.C, lpeg.Ct, lpeg.P, lpeg.V
+local Ct, P, V = lpeg.Ct, lpeg.P, lpeg.V
 
 local finder = {}
 
@@ -42,7 +42,7 @@ end
 
 function finder.get_content(s)
     assert(type(s) == "string")
-    return s
+    return u.get_string(s)
 end
 
 function finder.get_name()
