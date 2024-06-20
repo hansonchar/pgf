@@ -101,10 +101,13 @@ declare {
     every node with a single child, this child will be the first child
     and the second child will be missing.
   "]],
-  examples = [["
-    \tikz \graph [binary tree layout,level distance=5mm]
-    { a -> { b->c->d, e->f->g } };
-  "]]
+  examples = {
+    options = [[preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees}]],
+    [["
+      \tikz \graph [binary tree layout,level distance=5mm]
+      { a -> { b->c->d, e->f->g } };
+    "]]
+  }
 }
 
 ---
@@ -151,22 +154,24 @@ declare {
     the |right| and |left| keys are already in use for
     anchoring. Naturally, you can locally redefine them, if you want.
   "]],
-  examples = {[["
-    \tikz \graph [binary tree layout, level distance=5mm]
-    { a -> b[second] };
-  "]],[["
-    \tikz \graph [binary tree layout, level distance=5mm]
-    { a -> { b[second], c} };
-  "]],[["
-    \tikz \graph [binary tree layout, level distance=5mm]
-    { a -> { b, c[first]} };
-  "]],[["
-    \tikz \graph [binary tree layout, level distance=5mm]
-    { a -> { b[second], c[second]} };
-  "]],[["
-    \tikz \graph [binary tree layout, level distance=5mm]
-    { a -> { b[third], c[first], d} };
-  "]]
+  examples = {
+    options = [[preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees}]],
+    [["
+      \tikz \graph [binary tree layout, level distance=5mm]
+      { a -> b[second] };
+    "]],[["
+      \tikz \graph [binary tree layout, level distance=5mm]
+      { a -> { b[second], c} };
+    "]],[["
+      \tikz \graph [binary tree layout, level distance=5mm]
+      { a -> { b, c[first]} };
+    "]],[["
+      \tikz \graph [binary tree layout, level distance=5mm]
+      { a -> { b[second], c[second]} };
+    "]],[["
+      \tikz \graph [binary tree layout, level distance=5mm]
+      { a -> { b[third], c[first], d} };
+    "]]
   }
 }
 
