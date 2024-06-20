@@ -1,13 +1,13 @@
-local UNIT_TESTING = true
+local UNIT_TESTING = false
+local function pwd()
+  local info = debug.getinfo(1, "S")
+  local path = info.source:match("@(.*)")
+  local dir = path:match("(.*[/\\])") or "./"
+  return dir
+end
+package.path = pwd() .. "?.lua;" .. package.path
 
 if UNIT_TESTING then
-  local function pwd()
-    local info = debug.getinfo(1, "S")
-    local path = info.source:match("@(.*)")
-    local dir = path:match("(.*[/\\])") or "./"
-    return dir
-  end
-  package.path = pwd() .. "?.lua;" .. package.path
   local luarocks_path = os.getenv("HOME") .. "/.luarocks/share/lua/5.3/?.lua"
   package.path = package.path .. ";" .. luarocks_path
 end

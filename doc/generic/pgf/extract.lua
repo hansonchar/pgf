@@ -11,6 +11,7 @@ local documentfinder = require "documentfinder"
 local examplefinder = require "examplefinder"
 local exoptfinder = require "examplewithoptionfinder"
 local examplesfinder = require "examplesfinder"
+local examplescasfinder = require "examplescasfinder"
 
 local DEBUG = false
 
@@ -53,9 +54,14 @@ for n = 1, #arg - 1 do
     utils.walk(arg[n], arg[#arg], exoptfinder)
 end
 
--- Extract code exmples from examples being assigned as a table
+-- Extract code exmples from examples being assigned as a table of tables
 for n = 1, #arg - 1 do
     utils.walk(arg[n], arg[#arg], examplesfinder)
+end
+
+-- Extract code exmples from examples being assigned as a table of strings
+for n = 1, #arg - 1 do
+    utils.walk(arg[n], arg[#arg], examplescasfinder)
 end
 
 -- utils.walk("/Users/hchar/tmp/from", "/Users/hchar/tmp/mwe", exoptfinder)
