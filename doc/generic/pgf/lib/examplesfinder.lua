@@ -1,4 +1,4 @@
-local UNIT_TESTING = false
+local UNIT_TESTING = true
 
 if UNIT_TESTING then
   local function pwd()
@@ -63,7 +63,8 @@ local function flatten(captured)
   return result
 end
 
--- Grammar to extract code from a table assignment to "examples"
+-- Grammar to extract code from a table (with attributes "options" and "code")
+-- assignment to "examples"
 finder.grammar =
   P {
   "examples",
@@ -72,11 +73,11 @@ finder.grammar =
   pattern = SP * "examples" * SP * "=" * SP * "{" * SP * V "content" * SP * "}" / peek,
   content = Cf(Ct "" * Cg(V("options") ^ -1 * Ct(V("exentry") ^ 1)), reorg),
   options = V "optionskv" * P(",") ^ -1,
-  optionskv = Cg(C("options") * SP * "=" * SP * str),
+  optionskv = Cg(C("options") * SP * "=" * str),
   exentry = SP * "{" * SP * V "excontent" * SP * "}" * P(",") ^ -1,
   excontent = Cf(Ct "" * V("options") ^ -1 * V "code", u.set),
   code = SP * V "codekv",
-  codekv = Cg(C("code") * SP * "=" * SP * str)
+  codekv = Cg(C("code") * SP * "=" * str)
 }
 
 local function preamble(options)
