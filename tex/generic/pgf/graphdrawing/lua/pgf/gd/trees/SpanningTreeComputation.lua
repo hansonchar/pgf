@@ -237,20 +237,23 @@ declare {
     preferred in the computation of the spanning tree, but use
     |no span edge| to cause the algorithm to ignore these edges.
   "]],
-  examples = [['
-    \tikz \graph [tree layout, nodes={draw}, sibling distance=0pt,
-                  every group/.style={
-                    default edge kind=->, no span edge,
-                    path=source}]
-    {
-      5 -> {
-        "1,3" -> {0,2,4},
-        11    -> {
-          "7,9" -> { 6, 8, 10 }
+  examples = {
+    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees} ]],
+    [[
+      \tikz \graph [tree layout, nodes={draw}, sibling distance=0pt,
+                    every group/.style={
+                      default edge kind=->, no span edge,
+                      path=source}]
+      {
+        5 -> {
+          "1,3" -> {0,2,4},
+          11    -> {
+            "7,9" -> { 6, 8, 10 }
+          }
         }
-      }
-    };
-  ']]
+      };
+    ]]
+  }
 }
 
 
