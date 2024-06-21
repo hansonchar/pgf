@@ -40,7 +40,8 @@ InterfaceToAlgorithms.declare {
     Finally the force based Planar Drawing Postprocessing improves the drawing.
   "]],
   examples = {
-    [["
+    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees} ]],
+    [[
       \tikz \graph [nodes={draw, circle}] {
           a -- {
               b -- {
@@ -59,8 +60,8 @@ InterfaceToAlgorithms.declare {
           f --[no span edge] g,
           c --[no span edge] d,
           e --[no span edge] c
-      }
-    "]]
+      };
+    ]]
   }
 }
 
