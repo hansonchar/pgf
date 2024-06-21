@@ -52,16 +52,18 @@ are available for the static tree algorithm can be used:
 ]]
 
 
-example
-[[
-\tikz[animated binary tree layout]
-  \graph[nodes={draw,circle}, auto supernode] {
-          {[when=1] 15 -> {10 -> { ,11}, 20       }},
-          {[when=2] 15 -> {10 -> {3,11}, 20       }},
-          {[when=3] 15 -> {10 -> {3,  }, 20       }},
-          {[when=4] 15 -> {10 -> {3,  }, 20 -> 18 }},
-        };
-]]
+example({
+  options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{evolving} ]],
+  code = [[
+    \tikz[animated binary tree layout]
+      \graph[nodes={draw,circle}, auto supernode] {
+              {[when=1] 15 -> {10 -> { ,11}, 20       }},
+              {[when=2] 15 -> {10 -> {3,11}, 20       }},
+              {[when=3] 15 -> {10 -> {3,  }, 20       }},
+              {[when=4] 15 -> {10 -> {3,  }, 20 -> 18 }},
+            };
+  ]]
+})
 --------------------------------------------------------------------
 
 
