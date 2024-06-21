@@ -1,4 +1,4 @@
--- Copyright 2013 by Sarah Mäusle and Till Tantau
+-- Copyright 2013 by Sarah Mï¿½usle and Till Tantau
 --
 -- This file may be distributed an/or modified
 --
@@ -52,20 +52,23 @@ declare {
   documentation = [["
     ...
   "]],
-  examples = [["
-    \tikz \graph [phylogenetic tree layout,
-                  rooted rectangular phylogram,
-                  balanced minimum evolution,
-                  distance matrix={
-                    0 4 9 9 9 9 9
-                    4 0 9 9 9 9 9
-                    9 9 0 2 7 7 7
-                    9 9 2 0 7 7 7
-                    9 9 7 7 0 3 5
-                    9 9 7 7 3 0 5
-                    9 9 7 7 5 5 0}]
-      { a, b, c, d, e, f, g };
-  "]]
+  examples = {
+    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{phylogenetics} ]],
+    [[
+      \tikz \graph [phylogenetic tree layout,
+                    rooted rectangular phylogram,
+                    balanced minimum evolution,
+                    distance matrix={
+                      0 4 9 9 9 9 9
+                      4 0 9 9 9 9 9
+                      9 9 0 2 7 7 7
+                      9 9 2 0 7 7 7
+                      9 9 7 7 0 3 5
+                      9 9 7 7 3 0 5
+                      9 9 7 7 5 5 0}]
+        { a, b, c, d, e, f, g };
+    ]]
+  }
 }
 
 ---
@@ -94,20 +97,24 @@ declare {
   documentation = [["
     ...
   "]],
-  examples = [["
-    \tikz \graph [phylogenetic tree layout,
-                  rooted straight phylogram,
-                  balanced minimum evolution, grow=right,
-                  distance matrix={
-                    0 4 9 9 9 9 9
-                    4 0 9 9 9 9 9
-                    9 9 0 2 7 7 7
-                    9 9 2 0 7 7 7
-                    9 9 7 7 0 3 5
-                    9 9 7 7 3 0 5
-                    9 9 7 7 5 5 0}]
-      { a, b, c, d, e, f, g };
-  "]]}
+  examples = {
+    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{phylogenetics} ]],
+    [[
+      \tikz \graph [phylogenetic tree layout,
+                    rooted straight phylogram,
+                    balanced minimum evolution, grow=right,
+                    distance matrix={
+                      0 4 9 9 9 9 9
+                      4 0 9 9 9 9 9
+                      9 9 0 2 7 7 7
+                      9 9 2 0 7 7 7
+                      9 9 7 7 0 3 5
+                      9 9 7 7 3 0 5
+                      9 9 7 7 5 5 0}]
+        { a, b, c, d, e, f, g };
+    ]]
+  }
+}
 
 ---
 declare {
@@ -134,20 +141,23 @@ declare {
   documentation = [["
     ...
   "]],
-  examples = [["
-    \tikz \graph [phylogenetic tree layout,
-                  unrooted rectangular phylogram,
-                  balanced minimum evolution, grow=right,
-                  distance matrix={
-                    0 4 9 9 9 9 9
-                    4 0 9 9 9 9 9
-                    9 9 0 2 7 7 7
-                    9 9 2 0 7 7 7
-                    9 9 7 7 0 3 5
-                    9 9 7 7 3 0 5
-                    9 9 7 7 5 5 0}]
-      { a, b, c, d, e, f, g };
-  "]]
+  examples = {
+    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{phylogenetics} ]],
+    [[
+      \tikz \graph [phylogenetic tree layout,
+                    unrooted rectangular phylogram,
+                    balanced minimum evolution, grow=right,
+                    distance matrix={
+                      0 4 9 9 9 9 9
+                      4 0 9 9 9 9 9
+                      9 9 0 2 7 7 7
+                      9 9 2 0 7 7 7
+                      9 9 7 7 0 3 5
+                      9 9 7 7 3 0 5
+                      9 9 7 7 5 5 0}]
+        { a, b, c, d, e, f, g };
+    ]]
+  }
 }
 
 ---
@@ -168,20 +178,23 @@ declare {
   documentation = [["
     ...
   "]],
-  examples = [["
-    \tikz \graph [phylogenetic tree layout,
-                  unrooted straight phylogram,
-                  balanced minimum evolution, grow=right,
-                  distance matrix={
-                    0 4 9 9 9 9 9
-                    4 0 9 9 9 9 9
-                    9 9 0 2 7 7 7
-                    9 9 2 0 7 7 7
-                    9 9 7 7 0 3 5
-                    9 9 7 7 3 0 5
-                    9 9 7 7 5 5 0}]
-      { a, b, c, d, e, f, g };
-  "]]
+  examples = {
+    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{phylogenetics} ]],
+    [[
+      \tikz \graph [phylogenetic tree layout,
+                    unrooted straight phylogram,
+                    balanced minimum evolution, grow=right,
+                    distance matrix={
+                      0 4 9 9 9 9 9
+                      4 0 9 9 9 9 9
+                      9 9 0 2 7 7 7
+                      9 9 2 0 7 7 7
+                      9 9 7 7 0 3 5
+                      9 9 7 7 3 0 5
+                      9 9 7 7 5 5 0}]
+        { a, b, c, d, e, f, g };
+    ]]
+  }
 }
 
 
@@ -519,7 +532,7 @@ end
 --
 --  This is done using the function for setting the positions for a rooted layout:
 --  Two neighboring vertices are chosen as roots; one half of the tree
---  is drawn in one direction, the other half 180° to the other
+--  is drawn in one direction, the other half 180ï¿½ to the other
 --  direction.
 --
 -- @param vertex1, vertex2: The vertices functioning as roots
@@ -545,7 +558,7 @@ end
 --
 --  This is done using the function for setting the positions for a rooted straight layout:
 --  Two neighboring vertices are chosen as roots; one half of the tree
---  is drawn in one direction, the other half 180° to the other
+--  is drawn in one direction, the other half 180ï¿½ to the other
 --  direction.
 --
 -- @param vertex1, vertex2: The vertices functioning as roots
