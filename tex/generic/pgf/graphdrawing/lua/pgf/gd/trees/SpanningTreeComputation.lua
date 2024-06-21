@@ -409,16 +409,19 @@ declare {
     This strategy is nice with trees specified with both forward and
     backward edges.
   "]],
-  examples = [["
-    \tikz \graph [tree layout, nodes={draw}, sibling distance=0pt,
-                  span using directed]
-    {
-      3 <- 5[root] -> 8,
-      1 <- 3 -> 4,
-      7 <- 8 -> 9,
-      1 -- 4 -- 7 -- 9
-    };
-  "]]
+  examples = {
+    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees} ]],
+    [[
+      \tikz \graph [tree layout, nodes={draw}, sibling distance=0pt,
+                    span using directed]
+      {
+        3 <- 5[root] -> 8,
+        1 <- 3 -> 4,
+        7 <- 8 -> 9,
+        1 -- 4 -- 7 -- 9
+      };
+    ]]
+  }
 }
 
 ---
