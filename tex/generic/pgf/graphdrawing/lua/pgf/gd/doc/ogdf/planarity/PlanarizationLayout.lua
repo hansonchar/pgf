@@ -33,10 +33,12 @@ documentation
   \end{itemize}
 ]]
 
-example
-[[
-\tikz \graph [PlanarizationLayout] { a -- {b,c,d,e,f} -- g -- a };
-]]
+example({
+  options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{planarity} ]],
+  code = [[
+  \tikz \graph [PlanarizationLayout] { a -- {b,c,d,e,f} -- g -- a };
+  ]]
+})
 --------------------------------------------------------------------------------
 
 
