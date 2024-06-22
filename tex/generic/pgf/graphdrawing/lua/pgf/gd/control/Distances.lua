@@ -63,7 +63,7 @@ declare {
     this case, the \meta{length} is just considered as a lower bound.
   "]],
   examples = {
-    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{circular} ]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{circular}} ]],
     [[
       \begin{tikzpicture}
         \graph [simple necklace layout,  node distance=1cm, node sep=0pt,
