@@ -25,11 +25,11 @@ SimpleDemoC.o: SimpleDemoC.c
 
 
 SimpleDemoCPlusPlus.so: SimpleDemoCPlusPlus.o ../../interface/c/InterfaceFromC++.o  ../../interface/c/InterfaceFromC.o 
-	$(CC) $(FLAGS) $(SHAREDFLAGS) $(MYLDFLAGS) \
+	$(CPP) $(FLAGS) $(SHAREDFLAGS) $(MYLDFLAGS) \
 	$(LINKSHAREDLUA) \
 	-o SimpleDemoCPlusPlus.so \
 	SimpleDemoCPlusPlus.o ../../interface/c/InterfaceFromC++.o ../../interface/c/InterfaceFromC.o
 
 SimpleDemoCPlusPlus.o: SimpleDemoCPlusPlus.c++ ../../interface/c/InterfaceFromC++.h  ../../interface/c/InterfaceFromC.h
-	g++ $(FLAGS) -c -o SimpleDemoCPlusPlus.o SimpleDemoCPlusPlus.c++
+	$(CPP) $(FLAGS) -c -o SimpleDemoCPlusPlus.o SimpleDemoCPlusPlus.c++
 

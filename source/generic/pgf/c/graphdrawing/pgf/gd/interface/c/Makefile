@@ -14,4 +14,4 @@ InterfaceFromC.o: InterfaceFromC.c InterfaceFromC.h
 	$(CC) $(FLAGS) -c -o InterfaceFromC.o InterfaceFromC.c
 
 InterfaceFromC++.o: InterfaceFromC++.h InterfaceFromC.h InterfaceFromC++.c++ 
-	$(CC) $(FLAGS) -c -o InterfaceFromC++.o InterfaceFromC++.c++
+	$(CPP) $(FLAGS) -c -o InterfaceFromC++.o InterfaceFromC++.c++

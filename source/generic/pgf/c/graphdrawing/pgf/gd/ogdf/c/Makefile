@@ -28,7 +28,7 @@ ogdf_script.o: ogdf_script.c++ \
 		InterfaceFromOGDF.h \
 		../../interface/c/InterfaceFromC++.h \
 		../../interface/c/InterfaceFromC.h Makefile
-	$(CC) $(FLAGS) -c -o ogdf_script.o ogdf_script.c++
+	$(CPP) $(FLAGS) -c -o ogdf_script.o ogdf_script.c++
 
 
 SimpleDemoOGDF.so: SimpleDemoOGDF.o \
@@ -46,11 +46,11 @@ SimpleDemoOGDF.o: SimpleDemoOGDF.c++ \
 			InterfaceFromOGDF.h \
 			../../interface/c/InterfaceFromC++.h \
 			../../interface/c/InterfaceFromC.h
-	$(CC) $(FLAGS) -I$(OGDFINCLUDES) -c -o SimpleDemoOGDF.o SimpleDemoOGDF.c++
+	$(CPP) $(FLAGS) -I$(OGDFINCLUDES) -c -o SimpleDemoOGDF.o SimpleDemoOGDF.c++
 
 
 
 InterfaceFromOGDF.o: ../../interface/c/InterfaceFromC++.h ../../interface/c/InterfaceFromC.h \
 			InterfaceFromOGDF.c++ InterfaceFromOGDF.h
-	$(CC) $(FLAGS) -c -o InterfaceFromOGDF.o InterfaceFromOGDF.c++
+	$(CPP) $(FLAGS) -c -o InterfaceFromOGDF.o InterfaceFromOGDF.c++
 
