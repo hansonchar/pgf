@@ -55,11 +55,11 @@ declare {
   "]],
   examples = {
     options = [[ preamble=\usetikzlibrary{graphs.standard,graphdrawing} \usegdlibrary{circular,trees} ]],
-    [["
+    [[
       \tikz \graph [simple necklace layout, nodes={draw,fill=white},
                     nodes behind edges]
         { subgraph K_n [n=7], 1 [regardless at={(0,-1)}] };
-    "]]
+    ]]
   }
 }
 
@@ -77,11 +77,11 @@ declare {
   "]],
   examples = {
     options = [[ preamble=\usetikzlibrary{graphs.standard,graphdrawing} \usegdlibrary{circular,trees} ]],
-    [["
+    [[
       \tikz \graph [simple necklace layout, nodes={draw,fill=white},
                     edges behind nodes]
         { subgraph K_n [n=7], 1 [regardless at={(0,-1)}] };
-    "]]
+    ]]
   }
 }
 

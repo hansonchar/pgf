@@ -108,20 +108,20 @@ declare {
     rather it works as if this option were always set.
   "]],
   examples = {
-    options = [[preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{circular}]],
-    [["
-    \tikz \graph [simple necklace layout]
-      {
-        a -- b -- c -- d -- a,
-        1 -- 2 -- 3 -- 1
-      };
-    "]],[["
-    \tikz \graph [simple necklace layout, componentwise]
-      {
-        a -- b -- c -- d -- a,
-        1 -- 2 -- 3 -- 1
-      };
-  "]]
+    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{circular} ]],
+    [[
+      \tikz \graph [simple necklace layout]
+        {
+          a -- b -- c -- d -- a,
+          1 -- 2 -- 3 -- 1
+        };
+    ]],[[
+      \tikz \graph [simple necklace layout, componentwise]
+        {
+          a -- b -- c -- d -- a,
+          1 -- 2 -- 3 -- 1
+        };
+    ]]
   }
 }
 
