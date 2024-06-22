@@ -98,7 +98,7 @@ declare {
     simple necklace layout.
   "]],
   examples = {
-    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{circular} ]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{circular}} ]],
     [[
       \tikz \graph [simple necklace layout, node distance=0cm, nodes={circle,draw}]
         { 1--2--3--4--5--1 };
@@ -156,7 +156,7 @@ declare {
     \meta{length} is just considered as a lower bound.
   "]],
   examples = {
-    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered} ]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered}} ]],
     [[
       \begin{tikzpicture}[inner sep=2pt]
         \draw [help lines] (0,0) grid (3.5,2);
@@ -197,7 +197,7 @@ declare {
     than the ``margin'' key of cascading style sheets.
   "]],
   examples = {
-    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered} ]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered}} ]],
     [[
       \begin{tikzpicture}[inner sep=2pt, level sep=0pt, sibling distance=0pt]
         \draw [help lines] (0,0) grid (3.5,2);
@@ -290,7 +290,7 @@ declare {
     measured as the distance on the circle.
   "]],
   examples = {
-    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees} ]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees}} ]],
     [[
       \tikz \graph [tree layout, sibling distance=1cm, nodes={circle,draw}]
         { 1--{2,3,4,5} };
@@ -318,7 +318,7 @@ declare {
     Works like |level pre sep|, only for siblings.
   "]],
   examples = {
-    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees} ]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees}} ]],
     [[
       \tikz \graph [tree layout, sibling distance=0cm, nodes={circle,draw},
                     sibling sep=0pt]
@@ -429,7 +429,7 @@ declare {
     other.
   "]],
   examples = {
-    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees} ]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees}} ]],
     [["
       \tikz \graph [binary tree layout, sibling distance=4mm, level distance=8mm,
                     components go right top aligned,
