@@ -52,7 +52,7 @@ are available for the static tree algorithm can be used:
 ]]
 
 
-example({
+example {
   options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{evolving} ]],
   code = [[
     \tikz[animated binary tree layout]
@@ -63,7 +63,7 @@ example({
               {[when=4] 15 -> {10 -> {3,  }, 20 -> 18 }},
             };
   ]]
-})
+}
 --------------------------------------------------------------------
 
 

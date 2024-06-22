@@ -91,7 +91,7 @@ end
 
 local test_case1 =
     [=[
-example({
+example {
   options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered} ]],
   code = [[
     \begin{tikzpicture}
@@ -101,7 +101,7 @@ example({
         { a -- {b, c [anchor here] } -- d -- a};
     \end{tikzpicture}
   ]]
-})
+}
 ]=]
 
 do
@@ -123,14 +123,14 @@ end
 
 local test_case2 =
     [=[
-example({
+example {
   options = [[ preamble=first example preamble ]],
   code = [[ first example code ]]
-})
+}
 
-example({
+example {
   code = [[ second example code ]]
-})
+}
 ]=]
 
 do

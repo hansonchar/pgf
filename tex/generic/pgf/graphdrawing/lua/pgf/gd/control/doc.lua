@@ -103,7 +103,7 @@ nodes can ``move freely''.
 %    \usetikzlibrary{graphs,graphdrawing}
 %    \usegdlibrary{force}
 --]]
-example({
+example {
   options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force} ]],
   code = [[
     \begin{tikzpicture}
@@ -115,9 +115,9 @@ example({
       };
     \end{tikzpicture}
   ]]
-})
+}
 
-example({
+example {
   options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force} ]],
   code = [[
     \begin{tikzpicture}
@@ -129,9 +129,9 @@ example({
       };
     \end{tikzpicture}
   ]]
-})
+}
 
-example({
+example {
   options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force} ]],
   code = [[
   \begin{tikzpicture}
@@ -143,7 +143,7 @@ example({
     };
   \end{tikzpicture}
   ]]
-})
+}
 --------------------------------------------------------------------
 
 
@@ -178,15 +178,17 @@ Note how in the last example |c| is placed at |(1,1)| rather than
 %    \usetikzlibrary{graphs,graphdrawing}
 %    \usegdlibrary{layered}
 --]]
-example
-[[
-\tikz \draw (0,0)
-  -- (1,0.5) graph [edges=red,  layered layout, anchor node=a] { a -> {b,c} }
-  -- (1.5,0) graph [edges=blue, layered layout,
-                    anchor node=y, anchor at={(2,0)}]          { x -> {y,z} };
-]]
+example {
+  options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered} ]],
+  code = [[
+    \tikz \draw (0,0)
+      -- (1,0.5) graph [edges=red,  layered layout, anchor node=a] { a -> {b,c} }
+      -- (1.5,0) graph [edges=blue, layered layout,
+                        anchor node=y, anchor at={(2,0)}]          { x -> {y,z} };
+  ]]
+}
 
-example({
+example {
   options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered} ]],
   code = [[
     \begin{tikzpicture}
@@ -196,7 +198,7 @@ example({
         { a -- {b [x=1,y=1], c [x=1,y=1] } -- d -- a};
     \end{tikzpicture}
   ]]
-})
+}
 --------------------------------------------------------------------
 
 
@@ -211,7 +213,7 @@ The coordinate at which the graph should be anchored when no
 explicit anchor is given for any node. The initial value is the origin.
 ]]
 
-example({
+example {
   options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered} ]],
   code = [[
     \begin{tikzpicture}
@@ -221,7 +223,7 @@ example({
         { a -- {b, c [anchor here] } -- d -- a};
     \end{tikzpicture}
   ]]
-})
+}
 --------------------------------------------------------------------
 
 
@@ -243,7 +245,7 @@ In the example, |c| is placed at the origin since this is the
 default |anchor at| position.
 ]]
 
-example({
+example {
   options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered} ]],
   code = [[
     \begin{tikzpicture}
@@ -253,5 +255,5 @@ example({
         { a -- {b, c [anchor here] } -- d -- a};
     \end{tikzpicture}
   ]]
-})
+}
 --------------------------------------------------------------------

@@ -94,52 +94,62 @@ nodes there may be too much space between the nodes in order to
 satisfy the second condition.
 ]]
 
-example
-[[
-\tikz \graph [simple necklace layout,
+example {
+  options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{circular} ]],
+  code = [[
+    \tikz \graph [simple necklace layout,
+                  node sep=0pt, node distance=0pt,
+                  nodes={draw,circle}]
+    { 1 -- 2 [minimum size=30pt] -- 3 --
+      4 [minimum size=50pt] -- 5 [minimum size=40pt] -- 6 -- 7 };
+  ]]
+}
+
+example {
+  options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{circular} ]],
+  code = [[
+    \begin{tikzpicture}[radius=1.25cm]
+      \graph [simple necklace layout,
               node sep=0pt, node distance=0pt,
               nodes={draw,circle}]
-{ 1 -- 2 [minimum size=30pt] -- 3 --
-  4 [minimum size=50pt] -- 5 [minimum size=40pt] -- 6 -- 7 };
-]]
+      { 1 -- 2 [minimum size=30pt] -- 3 --
+        4 [minimum size=50pt] -- 5 [minimum size=40pt] -- 6 -- 7 };
 
-example
-[[
-\begin{tikzpicture}[radius=1.25cm]
-  \graph [simple necklace layout,
-          node sep=0pt, node distance=0pt,
-          nodes={draw,circle}]
-  { 1 -- 2 [minimum size=30pt] -- 3 --
-    4 [minimum size=50pt] -- 5 [minimum size=40pt] -- 6 -- 7 };
+      \draw [red] (0,-1.25) circle [];
+    \end{tikzpicture}
+  ]]
+}
 
-  \draw [red] (0,-1.25) circle [];
-\end{tikzpicture}
-]]
+example {
+  options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{circular} ]],
+  code = [[
+    \tikz \graph [simple necklace layout,
+                  node sep=0pt, node distance=1cm,
+                  nodes={draw,circle}]
+    { 1 -- 2 [minimum size=30pt] -- 3 --
+      4 [minimum size=50pt] -- 5 [minimum size=40pt] -- 6 -- 7 };
+  ]]
+}
 
-example
-[[
-\tikz \graph [simple necklace layout,
-              node sep=0pt, node distance=1cm,
-              nodes={draw,circle}]
-{ 1 -- 2 [minimum size=30pt] -- 3 --
-  4 [minimum size=50pt] -- 5 [minimum size=40pt] -- 6 -- 7 };
-]]
+example {
+  options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{circular} ]],
+  code = [[
+    \tikz \graph [simple necklace layout,
+                  node sep=2pt, node distance=0pt,
+                  nodes={draw,circle}]
+    { 1 -- 2 [minimum size=30pt] -- 3 --
+      4 [minimum size=50pt] -- 5 [minimum size=40pt] -- 6 -- 7 };
+  ]]
+}
 
-example
-[[
-\tikz \graph [simple necklace layout,
-              node sep=2pt, node distance=0pt,
-              nodes={draw,circle}]
-{ 1 -- 2 [minimum size=30pt] -- 3 --
-  4 [minimum size=50pt] -- 5 [minimum size=40pt] -- 6 -- 7 };
-]]
-
-example
-[[
-\tikz \graph [simple necklace layout,
-              node sep=0pt, node distance=0pt,
-              nodes={rectangle,draw}]
-{ 1 -- 2 [minimum size=30pt] -- 3 --
-  4 [minimum size=50pt] -- 5 [minimum size=40pt] -- 6 -- 7 };
-]]
+example {
+  options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{circular} ]],
+  code = [[
+    \tikz \graph [simple necklace layout,
+                  node sep=0pt, node distance=0pt,
+                  nodes={rectangle,draw}]
+    { 1 -- 2 [minimum size=30pt] -- 3 --
+      4 [minimum size=50pt] -- 5 [minimum size=40pt] -- 6 -- 7 };
+  ]]
+}
 --------------------------------------------------------------------
