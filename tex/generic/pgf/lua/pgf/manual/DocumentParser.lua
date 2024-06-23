@@ -26,6 +26,19 @@ local DocumentParser = {
   renderers = {}
 }
 
+local DEBUG = false
+
+local function dump(t)
+  print("*** dump starts ... {")
+  for key, val in pairs(t) do
+    print("*** dump/key:", key, "val:", val)
+  end
+  -- for i, e in ipairs(t) do
+  --   print("*** dump/", i, e)
+  -- end
+  print("*** dump ends }")
+end
+
 -- Namespace:
 require 'pgf.manual'.DocumentParser = DocumentParser
 
@@ -153,17 +166,32 @@ local function process_examples(t)
     return nil
   end
 
+  local options
   if type(t) == "string" then
+    if DEBUG then print("*** process_examples/t is string:", t) end
     t = {t}
+  else
+    if DEBUG then
+      print("*** process_examples/t is table:", t)
+      dump(t)
+    end
+    options = t.options
+    if DEBUG then print("*** process_examples/options:", options) end
   end
 
   local n = {}
+  if DEBUG then print("*** #t:", #t) end
   for i=1,#t do
-    local code, options
+    local code
     if type(t[i]) == "table" then
+      if DEBUG then
+        print("*** t[i].code:", i, t[i].code)
+        print("*** t[i].options:", i, t[i].options)
+      end
       code = assert(t[i].code)
       options = t[i].options
     else
+      if DEBUG then print("*** t[i]:", i, t[i]) end
       code = t[i]
     end
     n[i] = {
