@@ -71,19 +71,19 @@ declare {
   "]],
   examples = {
     options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force}} ]],
-    [["
+    [[
       \tikz \graph [spring layout]
       {
         a -- { b, c, d, e -- {f, g, h} };
         h -- [orient=30] a;
       };
-    "]],[["
+    ]],[[
       \tikz \graph [spring layout]
       {
         a -- { b, c, d[> orient=right], e -- {f, g, h} };
         h -- a;
       };
-    "]]
+    ]]
   }
 }
 
@@ -99,13 +99,16 @@ declare {
     Same as |orient|, only the rest of the graph should be
     flipped relative to the connection line.
   "]],
-  examples = [["
-    \tikz \graph [spring layout]
-    {
-      a -- { b, c, d[> orient'=right], e -- {f, g, h} };
-      h -- a;
-    };
-  "]]
+  examples = {
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force}} ]],
+    [[
+      \tikz \graph [spring layout]
+      {
+        a -- { b, c, d[> orient'=right], e -- {f, g, h} };
+        h -- a;
+      };
+    ]]
+  }
 }
 
 ---
@@ -120,17 +123,17 @@ declare {
   "]],
   examples = {
     options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force}} ]],
-    [["
+    [[
       \tikz \graph [spring layout] {
         a [orient=|, orient tail=f] -- { b, c, d, e -- {f, g, h} };
         { h, g } -- a;
       };
-    "]],[["
+    ]],[[
       \tikz \graph [spring layout] {
         a [orient=down, orient tail=h] -- { b, c, d, e -- {f, g, h} };
         { h, g } -- a;
       };
-    "]]
+    ]]
   }
 }
 
@@ -150,17 +153,17 @@ declare {
   "]],
   examples = {
     options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force}} ]],
-    [["
+    [[
       \tikz \graph [spring layout]
       {
         a [orient=|, orient head=f] -- { b, c, d, e -- {f, g, h} };
         { h, g } -- a;
       };
-    "]],[["
+    ]],[[
       \tikz \graph [spring layout] { a -- b -- c -- a };
       \tikz \graph [spring layout, orient=10,
                     orient tail=a, orient head=b] { a -- b -- c -- a };
-    "]]
+    ]]
   }
 }
 
@@ -177,10 +180,10 @@ declare {
   "]],
   examples = {
     options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force}} ]],
-    [["
+    [[
       \tikz \graph [spring layout]                    { a -- b -- c -- a };
       \tikz \graph [spring layout, horizontal=a to b] { a -- b -- c -- a };
-    "]]
+    ]]
   }
 }
 
@@ -213,10 +216,13 @@ declare {
   summary = [["
     A shorthand for specifying |orient tail|, |orient head| and |orient=-90|.
   "]],
-  examples = [["
-    \tikz \graph [spring layout]                  { a -- b -- c -- a };
-    \tikz \graph [spring layout, vertical=a to b] { a -- b -- c -- a };
-  "]]
+  examples = {
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force}} ]],
+    [[
+      \tikz \graph [spring layout]                  { a -- b -- c -- a };
+      \tikz \graph [spring layout, vertical=a to b] { a -- b -- c -- a };
+    ]]
+  }
 }
 
 
@@ -268,26 +274,26 @@ declare {
   "]],
   examples = {
     options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered}} ]],
-    [["
+    [[
       \tikz \graph [layered layout, sibling distance=5mm]
       {
         a [grow=right] -- { b, c, d, e -- {f, g, h} };
         { h, g } -- a;
       };
-    "]],[["
+    ]],[[
       \tikz \graph [layered layout, grow=right, sibling distance=5mm]
       {
         a -- { b, c, d, e -- {f, g, h} };
         { h, g } -- a;
       };
-    "]],[["
+    ]],[[
       \tikz
         \graph [layered layout, grow=-80]
         {
           {a,b,c} --[complete bipartite] {e,d,f}
                   --[complete bipartite] {g,h,i};
         };
-    "]]
+    ]]
   }
 }
 
@@ -299,13 +305,16 @@ declare {
   type = "direction",
 
   summary = "Same as |grow|, only with the children in clockwise order.",
-  examples = [["
-    \tikz \graph [layered layout, sibling distance=5mm]
-    {
-      a [grow'=right] -- { b, c, d, e -- {f, g, h} };
-      { h, g } -- a;
-    };
-  "]]
+  examples = {
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered}} ]],
+    [[
+      \tikz \graph [layered layout, sibling distance=5mm]
+      {
+        a [grow'=right] -- { b, c, d, e -- {f, g, h} };
+        { h, g } -- a;
+      };
+    ]]
+  }
 }
 
 
