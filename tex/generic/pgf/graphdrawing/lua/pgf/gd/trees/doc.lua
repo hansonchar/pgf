@@ -187,23 +187,27 @@ key.
 ]]
 
 
-example
-[[
-\tikz [tree layout, sibling distance=8mm]
-  \graph [nodes={circle, draw, inner sep=1.5pt}]{
-    1 -- { 2 -- 3 -- { 4 -- 5, 6 -- { 7, 8, 9 }}, 10 -- 11 -- { 12, 13 } }
-  };
-]]
+example {
+  options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees}} ]],
+  code = [[
+    \tikz [tree layout, sibling distance=8mm]
+      \graph [nodes={circle, draw, inner sep=1.5pt}]{
+        1 -- { 2 -- 3 -- { 4 -- 5, 6 -- { 7, 8, 9 }}, 10 -- 11 -- { 12, 13 } }
+      };
+  ]]
+}
 
 
-example
-[[
-\tikz [tree layout, grow=-30,
-       sibling distance=0mm, level distance=0mm,]
-  \graph [nodes={circle, draw, inner sep=1.5pt}]{
-    1 -- { 2 -- 3 -- { 4 -- 5, 6 -- { 7, 8, 9 }}, 10 -- 11 -- { 12, 13 } }
-  };
-]]
+example {
+  options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees}} ]],
+  code = [[
+    \tikz [tree layout, grow=-30,
+          sibling distance=0mm, level distance=0mm,]
+      \graph [nodes={circle, draw, inner sep=1.5pt}]{
+        1 -- { 2 -- 3 -- { 4 -- 5, 6 -- { 7, 8, 9 }}, 10 -- 11 -- { 12, 13 } }
+      };
+  ]]
+}
 --------------------------------------------------------------------
 
 
@@ -218,12 +222,14 @@ zero-width, zero-height nodes during the whole tree layout process.
 ]]
 
 
-example
-[[
-\tikz \graph [tree layout, missing nodes get space,
-              minimum number of children=2, nodes={draw,circle}]
-{ a -> { b -> c -> d, e -> f -> g } };
-]]
+example {
+  options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees}} ]],
+  code = [[
+    \tikz \graph [tree layout, missing nodes get space,
+                  minimum number of children=2, nodes={draw,circle}]
+    { a -> { b -> c -> d, e -> f -> g } };
+  ]]
+}
 --------------------------------------------------------------------
 
 
@@ -239,21 +245,23 @@ This space is added to significant pairs by the modified
 Reingold--Tilford algorithm.
 ]]
 
-example
-[[
-\tikz [baseline=(a.base), tree layout, significant sep=1em,
-       minimum number of children=2,
-       sibling distance=5mm, level distance=5mm]
-  \graph [nodes={circle, inner sep=0pt, minimum size=2mm, fill, as=}]{
-    a -- { b -- c -- { d -- e, f -- { g, h }}, i -- j -- k[second] }
-  };\quad
-\tikz [baseline=(a.base), tree layout, significant sep=1em,
-       minimum number of children=2,
-       sibling distance=5mm, level distance=5mm]
-  \graph [nodes={circle, inner sep=0pt, minimum size=2mm, fill, as=}]{
-    a -- { b -- c -- d -- e, i -- j -- { f -- {g,h}, k } }
-  };
-]]
+example {
+  options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees}} ]],
+  code = [[
+    \tikz [baseline=(a.base), tree layout, significant sep=1em,
+          minimum number of children=2,
+          sibling distance=5mm, level distance=5mm]
+      \graph [nodes={circle, inner sep=0pt, minimum size=2mm, fill, as=}]{
+        a -- { b -- c -- { d -- e, f -- { g, h }}, i -- j -- k[second] }
+      };\quad
+    \tikz [baseline=(a.base), tree layout, significant sep=1em,
+          minimum number of children=2,
+          sibling distance=5mm, level distance=5mm]
+      \graph [nodes={circle, inner sep=0pt, minimum size=2mm, fill, as=}]{
+        a -- { b -- c -- d -- e, i -- j -- { f -- {g,h}, k } }
+      };
+  ]]
+}
 --------------------------------------------------------------------
 
 
@@ -285,36 +293,45 @@ graph drawing engine's orientation mechanisms at one's disposal.
 ]]
 
 
-example
-[[
-\tikz [grow'=up, binary tree layout, sibling distance=7mm, level distance=7mm]
-  \graph {
-    a -- { b -- c -- { d -- e, f -- { g, h }}, i -- j -- k[second] }
-  };
-]]
+example {
+  options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees}} ]],
+  code = [[
+    \tikz [grow'=up, binary tree layout, sibling distance=7mm, level distance=7mm]
+      \graph {
+        a -- { b -- c -- { d -- e, f -- { g, h }}, i -- j -- k[second] }
+      };
+  ]]
+}
 
 --[[
 % TODOsp: codeexamples: the next example needs the library `arrows.meta`
 --]]
-example
-[[
-\tikz \graph [binary tree layout] {
-  Knuth -> {
-    Beeton -> Kellermann [second] -> Carnes,
-    Tobin -> Plass -> { Lamport, Spivak }
-  }
-};\qquad
-\tikz [>={Stealth[round,sep]}]
-  \graph [binary tree layout, grow'=right, level sep=1.5em,
-          nodes={right, fill=blue!50, text=white, chamfered rectangle},
-                 edges={decorate,decoration={snake, post length=5pt}}]
-  {
-    Knuth -> {
-      Beeton -> Kellermann [second] -> Carnes,
-      Tobin -> Plass -> { Lamport, Spivak }
+example {
+  options = [[
+    preamble = {
+      \usetikzlibrary{shapes.misc,arrows.meta,graphs,graphdrawing,decorations.pathmorphing}
+      \usegdlibrary{trees}
     }
-  };
-]]
+  ]],
+  code = [[
+    \tikz \graph [binary tree layout] {
+      Knuth -> {
+        Beeton -> Kellermann [second] -> Carnes,
+        Tobin -> Plass -> { Lamport, Spivak }
+      }
+    };\qquad
+    \tikz [>={Stealth[round,sep]}]
+      \graph [binary tree layout, grow'=right, level sep=1.5em,
+              nodes={right, fill=blue!50, text=white, chamfered rectangle},
+                    edges={decorate,decoration={snake, post length=5pt}}]
+      {
+        Knuth -> {
+          Beeton -> Kellermann [second] -> Carnes,
+          Tobin -> Plass -> { Lamport, Spivak }
+        }
+      };
+  ]]
+}
 --------------------------------------------------------------------
 
 
@@ -329,12 +346,14 @@ option \texttt{missing nodes get space} is executed and the
 \texttt{significant sep} is zero.
 ]]
 
-example
-[[
-\tikz [grow'=up, extended binary tree layout,
-       sibling distance=7mm, level distance=7mm]
-  \graph {
-    a -- { b -- c -- { d -- e, f -- { g, h }}, i -- j -- k[second] }
-  };
-]]
+example {
+  options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees}} ]],
+  code = [[
+    \tikz [grow'=up, extended binary tree layout,
+          sibling distance=7mm, level distance=7mm]
+      \graph {
+        a -- { b -- c -- { d -- e, f -- { g, h }}, i -- j -- k[second] }
+      };
+  ]]
+}
 --------------------------------------------------------------------
