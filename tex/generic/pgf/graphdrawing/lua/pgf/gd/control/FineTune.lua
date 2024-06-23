@@ -37,12 +37,15 @@ declare {
     after the algorithm has computed something.
   "]],
 
-  examples = [["
-    \tikz \graph [edges=rounded corners, nodes=draw,
-                  layered layout, sibling distance=0] {
-      a -- {b, c, d[nudge=(up:2mm)]} -- e -- a;
-     };
-  "]]
+  examples = {
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered}} ]],
+    [[
+      \tikz \graph [edges=rounded corners, nodes=draw,
+                    layered layout, sibling distance=0] {
+        a -- {b, c, d[nudge=(up:2mm)]} -- e -- a;
+      };
+    ]]
+  }
 }
 
 
@@ -57,12 +60,15 @@ declare {
   },
 
   summary = "A shorthand for nudging a node upwards.",
-  examples = [["
-    \tikz \graph [edges=rounded corners, nodes=draw,
-                  layered layout, sibling distance=0] {
-      a -- {b, c, d[nudge up=2mm]} -- e -- a;
-    };
-  "]]
+  examples = {
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered}} ]],
+    [[
+      \tikz \graph [edges=rounded corners, nodes=draw,
+                    layered layout, sibling distance=0] {
+        a -- {b, c, d[nudge up=2mm]} -- e -- a;
+      };
+    ]]
+  }
 }
 
 
@@ -90,12 +96,15 @@ declare {
   },
 
   summary = "Like |nudge up|, but left.",
-  examples = [["
-    \tikz \graph [edges=rounded corners, nodes=draw,
-                  layered layout, sibling distance=0] {
-      a -- {b, c, d[nudge left=2mm]} -- e -- a;
-    };
-  "]]
+  examples = {
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered}} ]],
+    [[
+      \tikz \graph [edges=rounded corners, nodes=draw,
+                    layered layout, sibling distance=0] {
+        a -- {b, c, d[nudge left=2mm]} -- e -- a;
+      };
+    ]]
+  }
 }
 
 ---
@@ -125,12 +134,15 @@ declare {
     afterwards, the node is placed there, regardless of what the
     algorithm has computed (all other nodes are unaffected).
   "]],
-  examples = [["
-    \tikz \graph [edges=rounded corners, nodes=draw,
-                  layered layout, sibling distance=0] {
-      a -- {b,c,d[regardless at={(1,0)}]} -- e -- a;
-    };
-  "]]
+  examples = {
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered}} ]],
+    [[
+      \tikz \graph [edges=rounded corners, nodes=draw,
+                    layered layout, sibling distance=0] {
+        a -- {b,c,d[regardless at={(1,0)}]} -- e -- a;
+      };
+    ]]
+  }
 }
 
 
@@ -154,11 +166,14 @@ declare {
     regardless. The name of the key is intended to remind one of a node
     being ``nailed'' to the canvas.
   "]],
-  examples = [["
-    \tikz \graph [edges=rounded corners, nodes=draw,
-                  layered layout, sibling distance=0] {
-      a -- {b,c,d[nail at={(1,0)}]} -- e[nail at={(1.5,-1)}] -- a;
-    };
-  "]]
+  examples = {
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered}} ]],
+    [[
+      \tikz \graph [edges=rounded corners, nodes=draw,
+                    layered layout, sibling distance=0] {
+        a -- {b,c,d[nail at={(1,0)}]} -- e[nail at={(1.5,-1)}] -- a;
+      };
+    ]]
+  }
 }
 
