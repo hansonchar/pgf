@@ -40,16 +40,14 @@ declare {
     of symmetries and an upscaling of the drawings.
   ]],
   examples = {
-    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force}} ]],
+    options = [[ preamble={\usetikzlibrary{graphs.standard,graphdrawing} \usegdlibrary{force}} ]],
     [[
         \tikz \graph [spring electrical layout, horizontal=0 to 1]
           { 0 [electric charge=1] -- subgraph C_n [n=10] };
-    ]],
-    [[
+    ]],[[
         \tikz \graph [spring electrical layout, horizontal=0 to 1]
           { 0 [electric charge=5] -- subgraph C_n [n=10] };
-    ]],
-    [[
+    ]],[[
         \tikz \graph [spring electrical layout, horizontal=0 to 1]
           { [clique] 1 [electric charge=5], 2, 3, 4 };
     ]]
