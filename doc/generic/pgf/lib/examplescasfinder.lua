@@ -25,7 +25,7 @@ local C, P, V, Ct, Cf, Cg = lpeg.C, lpeg.P, lpeg.V, lpeg.Ct, lpeg.Cf, lpeg.Cg
 --   end
 -- )
 
-local tostring = UNIT_TESTING and require "ml".tstring or nil
+-- local tostring = UNIT_TESTING and require "ml".tstring or nil
 
 local finder = {}
 
@@ -74,18 +74,8 @@ finder.grammar =
   exentry = str * P(",") ^ -1
 }
 
-local function preamble(options)
-  local p = SP * P "preamble" * SP * "=" * SP * C(P(1) ^ 1)
-  local matches = p:match(u.get_string(options))
-  local table = {}
-  if matches then
-    table.preamble = matches
-  end
-  return table
-end
-
 function finder.get_options(e)
-  return e.options and preamble(e.options) or {}
+  return e.options and u.preamble(e.options) or {}
 end
 
 function finder.get_content(e)
@@ -184,10 +174,11 @@ local test_case4 =
 do
   local matches = finder.grammar:match(test_case4)
   assert(#matches == 2)
-  assert(
-    u.strip(u.get_string(matches[1].options)) ==
-      [[preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force}}]]
-  )
+  local expected_options = [[preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force}}]]
+  assert(u.strip(u.get_string(matches[1].options)) == expected_options)
+  local t = u.preamble(expected_options)
+  assert(t.preamble == [[\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force}]])
+
   assert(
     u.strip(u.get_string(matches[1].code)) ==
       [[\tikz \graph [spring electrical layout, horizontal=0 to 1]

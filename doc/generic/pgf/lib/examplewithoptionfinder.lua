@@ -64,7 +64,7 @@ local function preamble(options)
     local matches = p:match(options)
     local table = {}
     if matches then
-        table.preamble = matches
+        table.preamble = u.strip_braces(matches)
     end
     return table
 end
@@ -135,7 +135,7 @@ example {
 
 do
     local matches = finder.grammar:match(test_case2)
-    print("#matches:", #matches)
+    assert(#matches == 2)
     assert(u.strip(finder.get_options(matches[1]).preamble) == [[first example preamble]])
     assert(u.strip(finder.get_content(matches[1])) == [[first example code]])
     assert(not finder.get_options(matches[2]).preamble)

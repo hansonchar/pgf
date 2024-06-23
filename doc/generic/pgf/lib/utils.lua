@@ -207,4 +207,14 @@ function u.walk(sourcedir, targetdir, finder)
     end
 end
 
+function u.preamble(options)
+    local p = u.SP * lpeg.P "preamble" * u.SP * "=" * u.SP * lpeg.C(lpeg.P(1) ^ 1)
+    local matches = p:match(u.get_string(options))
+    local table = {}
+    if matches then
+        table.preamble = u.strip_braces(matches)
+    end
+    return table
+end
+
 return utils

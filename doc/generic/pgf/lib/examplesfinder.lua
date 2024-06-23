@@ -81,18 +81,8 @@ finder.grammar =
   codekv = Cg(C("code") * SP * "=" * str)
 }
 
-local function preamble(options)
-  local p = SP * P "preamble" * SP * "=" * SP * C(P(1) ^ 1)
-  local matches = p:match(u.get_string(options))
-  local table = {}
-  if matches then
-    table.preamble = matches
-  end
-  return table
-end
-
 function finder.get_options(e)
-  return e.options and preamble(e.options) or {}
+  return e.options and u.preamble(e.options) or {}
 end
 
 function finder.get_content(e)
