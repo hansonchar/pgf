@@ -58,7 +58,7 @@ parentheses are a bit cumbersome, there is a special support for
 this key inside a |graph|: The standard |/tikz/at| key is redefined
 inside a |graph| so that it points to |/graph drawing/desired at|
 instead. (Which is more logical anyway, since it makes no sense to
-specify an |at| position for a node whose position it to be computed
+specify an |at| position for a node whose position is to be computed
 by a graph drawing algorithm.) A nice side effect of this is that
 you can use the |x| and |y| keys (see
 Section~\ref{section-graphs-xy}) to specify desired positions:
