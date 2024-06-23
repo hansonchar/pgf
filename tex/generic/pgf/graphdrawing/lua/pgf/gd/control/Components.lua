@@ -66,7 +66,7 @@ local declare       = require "pgf.gd.interface.InterfaceToAlgorithms".declare
 --     have the same vertical position. There are several other strategies,
 --     which can be configured using the |component align| key.
 --
---     One the vertical position has been fixed, the horizontal position is
+--     Once the vertical position has been fixed, the horizontal position is
 --     computed. Here, two different strategies are available: First, image
 --     rectangular bounding boxed to be drawn around both components. Then
 --     we shift the second component such that the right border of the
