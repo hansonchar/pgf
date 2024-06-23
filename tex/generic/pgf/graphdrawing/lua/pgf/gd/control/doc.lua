@@ -104,7 +104,7 @@ nodes can ``move freely''.
 %    \usegdlibrary{force}
 --]]
 example {
-  options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force} ]],
+  options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force}} ]],
   code = [[
     \begin{tikzpicture}
       \draw [help lines] (0,0) grid (3,2);
@@ -118,7 +118,7 @@ example {
 }
 
 example {
-  options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force} ]],
+  options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force}} ]],
   code = [[
     \begin{tikzpicture}
       \draw [help lines] (0,0) grid (3,2);
@@ -132,7 +132,7 @@ example {
 }
 
 example {
-  options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force} ]],
+  options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force}} ]],
   code = [[
   \begin{tikzpicture}
     \draw [help lines] (0,0) grid (3,2);
@@ -179,7 +179,7 @@ Note how in the last example |c| is placed at |(1,1)| rather than
 %    \usegdlibrary{layered}
 --]]
 example {
-  options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered} ]],
+  options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered}} ]],
   code = [[
     \tikz \draw (0,0)
       -- (1,0.5) graph [edges=red,  layered layout, anchor node=a] { a -> {b,c} }
@@ -189,7 +189,7 @@ example {
 }
 
 example {
-  options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered} ]],
+  options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered}} ]],
   code = [[
     \begin{tikzpicture}
       \draw [help lines] (0,0) grid (3,2);
@@ -214,7 +214,7 @@ explicit anchor is given for any node. The initial value is the origin.
 ]]
 
 example {
-  options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered} ]],
+  options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered}} ]],
   code = [[
     \begin{tikzpicture}
       \draw [help lines] (0,0) grid (2,2);
@@ -246,7 +246,7 @@ default |anchor at| position.
 ]]
 
 example {
-  options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered} ]],
+  options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered}} ]],
   code = [[
     \begin{tikzpicture}
       \draw [help lines] (0,0) grid (2,2);

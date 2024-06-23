@@ -54,7 +54,7 @@ declare {
     invoked, nodes are placed \emph{behind} the edges.
   "]],
   examples = {
-    options = [[ preamble=\usetikzlibrary{graphs.standard,graphdrawing} \usegdlibrary{circular,trees} ]],
+    options = [[ preamble={\usetikzlibrary{graphs.standard,graphdrawing} \usegdlibrary{circular,trees}} ]],
     [[
       \tikz \graph [simple necklace layout, nodes={draw,fill=white},
                     nodes behind edges]
@@ -76,7 +76,7 @@ declare {
     This is the default placement of edges: Behind the nodes.
   "]],
   examples = {
-    options = [[ preamble=\usetikzlibrary{graphs.standard,graphdrawing} \usegdlibrary{circular,trees} ]],
+    options = [[ preamble={\usetikzlibrary{graphs.standard,graphdrawing} \usegdlibrary{circular,trees}} ]],
     [[
       \tikz \graph [simple necklace layout, nodes={draw,fill=white},
                     edges behind nodes]
@@ -124,7 +124,7 @@ declare {
     will be as short as possible.
   "]],
   examples = {
-    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered} ]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered}} ]],
     [["
       \tikz \graph [layered layout] {
         a -- {b,c,d} -- e -- a;
@@ -150,7 +150,7 @@ declare {
     into account when drawing a graph.
   "]],
   examples = {
-    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{phylogenetics} ]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{phylogenetics}} ]],
     [["
       \tikz \graph [phylogenetic tree layout] {
         a --[length=2] b --[length=1] {c,d};

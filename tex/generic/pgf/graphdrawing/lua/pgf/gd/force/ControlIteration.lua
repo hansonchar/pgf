@@ -48,7 +48,7 @@ declare {
     different |iteration| limits.
   "]],
   examples = {
-    options = [[preamble=\usetikzlibrary{graphs.standard,graphdrawing} \usegdlibrary{force}]],
+    options = [[ preamble={\usetikzlibrary{graphs.standard,graphdrawing} \usegdlibrary{force}} ]],
     [["
       \tikz \graph [spring layout, iterations=10]  { subgraph K_n [n=4] };
     "]],[["
@@ -100,7 +100,7 @@ declare {
     cooling factor of |0.95|.
   "]],
   examples = {
-    options = [[preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force}]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force}} ]],
     [["
       \tikz \graph [spring layout, cooling factor=0.1]
         { a -> b -> c -> a };
@@ -125,7 +125,7 @@ declare {
       with the convergence tolerance option:
   "]],
   examples = {
-    options = [[preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force}]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force}} ]],
     [["
       \tikz \graph [spring layout, convergence tolerance=0.001]
         { { [clique] 1, 2 } -- 3 -- 4 -- { 5, 6, 7 } };

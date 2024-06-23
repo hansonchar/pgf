@@ -61,7 +61,7 @@ declare {
     |spring electrical layout'|.
   "]],
   examples = {
-    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force} ]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force}} ]],
     [[
       \tikz \graph [spring electrical layout', coarsen=false, vertical=3 to 4]
         {
@@ -99,7 +99,7 @@ declare {
     coordinates in the final drawing.
   "]],
   examples = {
-    options = [[ preamble=\usetikzlibrary{graphs.standard,graphdrawing} \usegdlibrary{force} ]],
+    options = [[ preamble={\usetikzlibrary{graphs.standard,graphdrawing} \usegdlibrary{force}} ]],
     [[
       \tikz \graph [spring layout, iterations=0,
                     minimum coarsening size=2]
@@ -138,7 +138,7 @@ declare {
     |downsize ratio|.
   "]],
   examples = {
-    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force} ]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force}} ]],
     [[
       % 1. ratio too high, coarsening stops early, benefits are lost
       \tikz \graph [spring electrical layout',

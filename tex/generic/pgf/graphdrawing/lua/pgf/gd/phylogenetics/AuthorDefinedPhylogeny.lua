@@ -44,7 +44,7 @@ declare {
     the use of the |length| key for each edge.
   "]],
   examples = {
-    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{phylogenetics} ]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{phylogenetics}} ]],
     [[
       \tikz \graph [phylogenetic tree layout] {
         a -- {

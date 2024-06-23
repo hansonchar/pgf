@@ -95,7 +95,7 @@ satisfy the second condition.
 ]]
 
 example {
-  options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{circular} ]],
+  options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{circular}} ]],
   code = [[
     \tikz \graph [simple necklace layout,
                   node sep=0pt, node distance=0pt,
@@ -106,7 +106,7 @@ example {
 }
 
 example {
-  options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{circular} ]],
+  options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{circular}} ]],
   code = [[
     \begin{tikzpicture}[radius=1.25cm]
       \graph [simple necklace layout,
@@ -121,7 +121,7 @@ example {
 }
 
 example {
-  options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{circular} ]],
+  options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{circular}} ]],
   code = [[
     \tikz \graph [simple necklace layout,
                   node sep=0pt, node distance=1cm,
@@ -132,7 +132,7 @@ example {
 }
 
 example {
-  options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{circular} ]],
+  options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{circular}} ]],
   code = [[
     \tikz \graph [simple necklace layout,
                   node sep=2pt, node distance=0pt,
@@ -143,7 +143,7 @@ example {
 }
 
 example {
-  options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{circular} ]],
+  options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{circular}} ]],
   code = [[
     \tikz \graph [simple necklace layout,
                   node sep=0pt, node distance=0pt,

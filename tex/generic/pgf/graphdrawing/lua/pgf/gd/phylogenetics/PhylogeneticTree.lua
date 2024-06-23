@@ -41,7 +41,7 @@ declare {
     ...
   "]],
   examples = {
-    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{phylogenetics} ]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{phylogenetics}} ]],
     [[
       \tikz \graph [phylogenetic tree layout, upgma,
                     distance matrix={

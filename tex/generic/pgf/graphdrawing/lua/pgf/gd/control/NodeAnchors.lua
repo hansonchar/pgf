@@ -162,7 +162,7 @@ declare {
   "]],
 
   examples = {
-    options = [[preamble=\usetikzlibrary{graphs,graphdrawing}]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing}} ]],
     [["
       \tikz \graph [no layout, nodes={draw, minimum size=20pt}] {
         a [x=0, y=0] -- b [x=15pt, y=10pt] -- c[x=40pt]

@@ -92,7 +92,7 @@ end
 local test_case1 =
     [=[
 example {
-  options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered} ]],
+  options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered}} ]],
   code = [[
     \begin{tikzpicture}
       \draw [help lines] (0,0) grid (2,2);

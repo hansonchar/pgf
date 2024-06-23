@@ -59,7 +59,7 @@ declare {
     \end{itemize}
   "]],
   examples = {
-    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees} ]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees}} ]],
     [[
       \tikz \graph [tree layout, nodes={inner sep=1pt,draw,circle},
                     component order=by first specified node]
@@ -97,7 +97,7 @@ declare {
     A shorthand for |component order=decreasing node number|.
   "]],
   examples = {
-    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees} ]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees}} ]],
     [[
       \tikz \graph [tree layout, nodes={inner sep=1pt,draw,circle},
                     large components first]

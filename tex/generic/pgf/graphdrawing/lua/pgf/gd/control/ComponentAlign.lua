@@ -60,7 +60,7 @@ declare {
     component is used.
   "]],
   examples = {
-    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees} ]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees}} ]],
     [[
       \tikz \graph [binary tree layout, nodes={draw}]
         { a, b -- c[align here], d -- e[second, align here] -- f };
@@ -204,7 +204,7 @@ declare {
     aligned such that their top nodes are in a line.
   "]],
   examples = {
-    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees} ]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees}} ]],
     [[
       \tikz \graph [tree layout, nodes={draw, align=center},
                     components go right top aligned]
@@ -229,7 +229,7 @@ declare {
     boxed being top-aligned.
   "]],
   examples = {
-    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees} ]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees}} ]],
     [[
       \tikz \graph [tree layout, nodes={draw, align=center},
                     components go right absolute top aligned]
@@ -305,7 +305,7 @@ declare {
   summary = "See the other |components go ...| keys.",
 
   examples = {
-    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees} ]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees}} ]],
     [[
       \tikz \graph [tree layout, nodes={draw, align=center},
                     components go left top aligned]
@@ -394,7 +394,7 @@ declare {
   summary = "See the other |components go ...| keys.",
 
   examples = {
-    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees} ]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees}} ]],
     [[
       \tikz \graph [tree layout, nodes={draw, align=center},
                     components go down left aligned]

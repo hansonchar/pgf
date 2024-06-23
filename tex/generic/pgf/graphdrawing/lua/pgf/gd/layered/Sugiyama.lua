@@ -72,7 +72,7 @@ declare {
     |rounded corners| option:
   "]],
   examples = {
-    options = [[preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered}]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered}} ]],
     [["
     \tikz \graph [layered layout, sibling distance=7mm]
     {

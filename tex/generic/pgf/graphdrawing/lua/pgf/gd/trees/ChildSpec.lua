@@ -102,7 +102,7 @@ declare {
     and the second child will be missing.
   "]],
   examples = {
-    options = [[preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees}]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees}} ]],
     [["
       \tikz \graph [binary tree layout,level distance=5mm]
       { a -> { b->c->d, e->f->g } };
@@ -155,7 +155,7 @@ declare {
     anchoring. Naturally, you can locally redefine them, if you want.
   "]],
   examples = {
-    options = [[preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees}]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees}} ]],
     [["
       \tikz \graph [binary tree layout, level distance=5mm]
       { a -> b[second] };

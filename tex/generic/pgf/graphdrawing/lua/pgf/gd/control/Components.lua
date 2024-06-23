@@ -108,7 +108,7 @@ declare {
     rather it works as if this option were always set.
   "]],
   examples = {
-    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{circular} ]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{circular}} ]],
     [[
       \tikz \graph [simple necklace layout]
         {

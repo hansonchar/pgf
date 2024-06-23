@@ -53,7 +53,7 @@ declare {
     ...
   "]],
   examples = {
-    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{phylogenetics} ]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{phylogenetics}} ]],
     [[
       \tikz \graph [phylogenetic tree layout,
                     rooted rectangular phylogram,
@@ -98,7 +98,7 @@ declare {
     ...
   "]],
   examples = {
-    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{phylogenetics} ]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{phylogenetics}} ]],
     [[
       \tikz \graph [phylogenetic tree layout,
                     rooted straight phylogram,
@@ -142,7 +142,7 @@ declare {
     ...
   "]],
   examples = {
-    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{phylogenetics} ]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{phylogenetics}} ]],
     [[
       \tikz \graph [phylogenetic tree layout,
                     unrooted rectangular phylogram,
@@ -179,7 +179,7 @@ declare {
     ...
   "]],
   examples = {
-    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{phylogenetics} ]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{phylogenetics}} ]],
     [[
       \tikz \graph [phylogenetic tree layout,
                     unrooted straight phylogram,

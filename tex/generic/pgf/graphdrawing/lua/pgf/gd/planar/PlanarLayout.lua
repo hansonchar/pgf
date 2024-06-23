@@ -40,7 +40,7 @@ InterfaceToAlgorithms.declare {
     Finally the force based Planar Drawing Postprocessing improves the drawing.
   "]],
   examples = {
-    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees} ]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees}} ]],
     [[
       \tikz \graph [nodes={draw, circle}] {
           a -- {

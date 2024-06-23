@@ -52,8 +52,10 @@ declare {
 
   examples = {
     options = [[
-      preamble=\usetikzlibrary{arrows.meta,graphs,graphdrawing,bending}
-               \usegdlibrary{circular,routing}
+      preamble = {
+        \usetikzlibrary{arrows.meta,graphs,graphdrawing,bending}
+        \usegdlibrary{circular,routing}
+      }
     ]], [[
       \tikz \graph [simple necklace layout, node distance=1.5cm,
                     necklace routing,

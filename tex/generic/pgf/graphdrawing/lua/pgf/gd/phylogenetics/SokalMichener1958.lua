@@ -46,7 +46,7 @@ declare {
     one, to compute the graph.
   "]],
   examples = {
-    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{phylogenetics} ]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{phylogenetics}} ]],
     [[
       \tikz \graph [phylogenetic tree layout, sibling distance=0pt, sibling sep=2pt,
                     unweighted pair group method using arithmetic averages,

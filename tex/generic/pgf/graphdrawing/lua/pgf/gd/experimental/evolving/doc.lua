@@ -53,7 +53,7 @@ are available for the static tree algorithm can be used:
 
 
 example {
-  options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{evolving} ]],
+  options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{evolving}} ]],
   code = [[
     \tikz[animated binary tree layout]
       \graph[nodes={draw,circle}, auto supernode] {

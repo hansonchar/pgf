@@ -39,7 +39,7 @@ declare {
     options to orient individual components.
   "]],
   examples = {
-    options = [[preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees}]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees}} ]],
     [["
       \tikz \graph [tree layout, nodes={inner sep=1pt,draw,circle},
                     component direction=left]

@@ -70,7 +70,7 @@ declare {
     |right|. Also, you can specify |-| for ``right'' and \verb!|! for ``down''.
   "]],
   examples = {
-    options = [[preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force}]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force}} ]],
     [["
       \tikz \graph [spring layout]
       {
@@ -119,7 +119,7 @@ declare {
     |orient| for details.
   "]],
   examples = {
-    options = [[preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force}]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force}} ]],
     [["
       \tikz \graph [spring layout] {
         a [orient=|, orient tail=f] -- { b, c, d, e -- {f, g, h} };
@@ -149,7 +149,7 @@ declare {
     |orient| for details.
   "]],
   examples = {
-    options = [[preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force}]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force}} ]],
     [["
       \tikz \graph [spring layout]
       {
@@ -176,7 +176,7 @@ declare {
     and the head will be everything following it.
   "]],
   examples = {
-    options = [[preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force}]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{force}} ]],
     [["
       \tikz \graph [spring layout]                    { a -- b -- c -- a };
       \tikz \graph [spring layout, horizontal=a to b] { a -- b -- c -- a };
@@ -267,7 +267,7 @@ declare {
     be applied to all nodes. This happens to be exactly what you want:
   "]],
   examples = {
-    options = [[preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered}]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{layered}} ]],
     [["
       \tikz \graph [layered layout, sibling distance=5mm]
       {

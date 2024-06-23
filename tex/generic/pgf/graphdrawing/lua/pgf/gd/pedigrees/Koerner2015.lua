@@ -74,7 +74,7 @@ declare {
       ...
   "]],
   examples = {
-    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{pedigrees} ]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{pedigrees}} ]],
     [[
       \tikz \graph [simple pedigree layout, default edge operator=complete bipartite]
       {

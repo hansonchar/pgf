@@ -238,7 +238,7 @@ declare {
     |no span edge| to cause the algorithm to ignore these edges.
   "]],
   examples = {
-    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees} ]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees}} ]],
     [[
       \tikz \graph [tree layout, nodes={draw}, sibling distance=0pt,
                     every group/.style={
@@ -410,7 +410,7 @@ declare {
     backward edges.
   "]],
   examples = {
-    options = [[ preamble=\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees} ]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{trees}} ]],
     [[
       \tikz \graph [tree layout, nodes={draw}, sibling distance=0pt,
                     span using directed]
