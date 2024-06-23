@@ -26,7 +26,7 @@
 -- There are two ways in which you can specify an orientation: First,
 -- you can specify that the line from a certain vertex to another
 -- vertex should have a certain slope. How these vertices and slopes
--- are specified in explained momentarily. Second, you can specify a
+-- are specified is explained momentarily. Second, you can specify a
 -- so-called ``growth direction'' for trees.
 --
 -- @end
