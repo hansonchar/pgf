@@ -80,7 +80,7 @@ local declare       = require "pgf.gd.interface.InterfaceToAlgorithms".declare
 --     After the second component has been placed, the third component is
 --     considered and positioned relative to the second one, and so on.
 --   \item
---     At the end, as hinted at earlier, the whole arrangement is rotate so
+--     At the end, as hinted at earlier, the whole arrangement is rotated so
 --     that instead of ``going right'' the component go in the direction of
 --     |component direction|. Note, however, that this rotation applies only
 --     to the ``shift'' of the components; the components themselves are
