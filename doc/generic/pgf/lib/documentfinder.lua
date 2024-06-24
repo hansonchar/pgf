@@ -17,6 +17,10 @@ local lpeg = require("lpeg")
 local C, Cf, Cg, Ct, P, S, V = lpeg.C, lpeg.Cf, lpeg.Cg, lpeg.Ct, lpeg.P, lpeg.S, lpeg.V
 local u = require("utils")
 
+local function strip_dashdash(s)
+    return s and s:gsub("\n%-%-", "\n"):gsub("^%-%-", "") or s
+end
+
 local finder = {}
 
 -- Grammar to extract code examples from document
@@ -38,11 +42,15 @@ finder.grammar =
 }
 
 function finder.get_options(e)
+    local options = e[1]
+    if options and options["preamble"] then
+        options["preamble"] = strip_dashdash(options["preamble"])
+    end
     return e[1]
 end
 
 function finder.get_content(e)
-    return e[2]
+    return strip_dashdash(e[2])
 end
 
 function finder.get_name()
@@ -53,7 +61,7 @@ if not UNIT_TESTING then
     return finder
 end
 
-local tostring = require "ml".tstring
+-- local tostring = UNIT_TESTING and require "ml".tstring or nil
 
 local testcase_1 =
     [=[
@@ -115,6 +123,22 @@ do
   {[hyper] d}
 };]]
     )
+end
+
+local test_case_3 = [[
+-- This is a comment
+-- Another comment line
+-- Yet another comment
+]]
+
+do
+    local output = strip_dashdash(test_case_3)
+    assert(output == [[
+ This is a comment
+ Another comment line
+ Yet another comment
+]])
+    assert(not strip_dashdash(nil))
 end
 
 return finder
