@@ -23,7 +23,7 @@ local declare = require "pgf.gd.interface.InterfaceToAlgorithms".declare
 ---
 
 declare {
-  key = "simple demo layout",
+  key = "very simple demo layout",
   algorithm = {
     run =
       function (self)
@@ -50,7 +50,7 @@ declare {
 local declare = require "pgf.gd.interface.InterfaceToAlgorithms".declare
 
 declare {
-  key = "simple demo layout",
+  key = "very simple demo layout",
   algorithm = {
     run =
       function (self)

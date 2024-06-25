@@ -126,7 +126,7 @@ look at the more standard and verbose way in a moment):
 %
 \begin{codeexample}[code only, tikz syntax=false]
 pgf.gd.interface.InterfaceToAlgorithms.declare {
-  key = "simple demo layout",
+  key = "very simple demo layout",
   algorithm = {
     run =
       function (self)
@@ -139,23 +139,8 @@ pgf.gd.interface.InterfaceToAlgorithms.declare {
   }
 }
 \end{codeexample}
-\directlua{
-pgf.gd.interface.InterfaceToAlgorithms.declare {
-  key = "very simple demo layout",
-  algorithm = {
-    run =
-      function (self)
-        local alpha = (2 * math.pi) / \luaescapestring{#}self.ugraph.vertices
-        for i,vertex in ipairs(self.ugraph.vertices) do
-          vertex.pos.x = math.cos(i * alpha) * 25
-          vertex.pos.y = math.sin(i * alpha) * 25
-        end
-      end
-  }
-}
-}
 
-This code \emph {declares} a new algorithm (|simple demo layout|) and
+This code \emph {declares} a new algorithm (|very simple demo layout|) and
 includes an implementation of the algorithm (through the |run| field of the
 |algorithm| field). When the |run| method is called, the |self| parameter will
 contain the to-be-drawn graph in its |ugraph| field. It is now the job of the
@@ -171,14 +156,14 @@ editor, the code could also be executed through the use of |require|.
 
 Executing the code ``just'' declares the algorithm, this is what the |declare|
 function does. Inside some internal tables, the algorithm layer will store the
-fact that a  |simple demo layout| is now available. The algorithm layer
+fact that a  |very simple demo layout| is now available. The algorithm layer
 will also communicate with the display layer through the binding layer to
 advertise this fact to the ``user''. In the case of \tikzname, this means that
-the option key |simple demo layout| becomes available at this point and we
+the option key |very simple demo layout| becomes available at this point and we
 can use it like this:
 %
 \begin{codeexample}[preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{simpledemo}}]
-\tikz [simple demo layout]
+\tikz [very simple demo layout]
   \graph { f -> c -> e -> a -> {b -> {c, d, f}, e -> b}};
 \end{codeexample}
 
@@ -186,7 +171,7 @@ It turns out, that our little algorithm is already more powerful than one might
 expect. Consider the following example:
 %
 \begin{codeexample}[preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{simpledemo}}]
-\tikz [simple demo layout, componentwise]
+\tikz [very simple demo layout, componentwise]
   \graph {
     1 -> 2 ->[orient=right] 3 -> 1;
     a -- b --[orient=45]  c -- d -- a;
