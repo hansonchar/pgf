@@ -9,8 +9,6 @@
 
 -- @release $Header$
 
-
-
 ---
 -- This package presents some examples of how different aspects of the
 -- graph drawing engine can be used. In particular, the algorithms of
@@ -20,11 +18,7 @@
 --
 -- @library
 
-local examples
-
-
 -- Load algorithms from:
 require "pgf.gd.examples.simpledemo"
 require "pgf.gd.examples.SimpleEdgeDemo"
 require "pgf.gd.examples.SimpleHuffman"
-
