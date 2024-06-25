@@ -282,14 +282,14 @@ Upon this call, the |self| object will have some important fields set:
         particular, the |ugraph| typically will not be the underlying
         undirected graph of the complete syntactic digraph, but rather of some
         part of it. The use of (sub)layouts will also modify the syntactic
-        digraph is fancy ways.
+        digraph in fancy ways.
 
         Refer to this graph whenever your algorithm is ``most comfortable''
         with an undirected graph, as is the case for instance for most
         force-base algorithms.
     \item |digraph| This stands for ``directed graph'' and is the
         ``semantically directed'' version of the to-be-laid out graph.
-        Basically, when happens is that reverse edges in the syntactic digraph
+        Basically, what happens is that reverse edges in the syntactic digraph
         (an edge like |b <- a|) will yield an |Arc| from |a| to |b| in the
         |digraph| while they yield a |b| to |a| arc and edge in the syntactic
         digraph. Also, undirected edges like |a -- b| are replaced by directed
