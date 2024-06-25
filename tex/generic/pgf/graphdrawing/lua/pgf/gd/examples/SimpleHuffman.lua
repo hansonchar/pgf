@@ -51,8 +51,11 @@ declare {
       HuffmanNode/.style={/tikz/.cd,circle,inner sep=0pt,outer sep=0pt,draw,minimum size=3pt}
     }
 
-\begin{codeexample}[preamble={    \usetikzlibrary{graphs,graphdrawing,quotes}
-    \usegdlibrary{examples}}]
+\begin{codeexample}[preamble={\usetikzlibrary{graphs,graphdrawing,quotes} \usegdlibrary{examples}}]
+\pgfgdset{
+  HuffmanLabel/.style={/tikz/edge node={node[fill=white,font=\footnotesize,inner sep=1pt]{#1}}},
+  HuffmanNode/.style={/tikz/.cd,circle,inner sep=0pt,outer sep=0pt,draw,minimum size=3pt}
+}
 \tikz \graph [simple Huffman layout,
               level distance=7mm, sibling distance=8mm, grow'=up]
 {
