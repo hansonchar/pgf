@@ -183,8 +183,12 @@ function u.walk(sourcedir, targetdir, finder)
                     local newname = finder.get_name() .. "-" .. name .. "-" .. n .. ".tex"
                     local examplefile = io.open(targetdir .. newname, "w")
 
-                    examplefile:write "\\documentclass{standalone}\n"
-                    examplefile:write "\\usepackage{fp,pgf,tikz,xcolor}\n"
+                    examplefile:write [[
+\documentclass{standalone}
+\usepackage{fp,pgf,tikz,xcolor}
+\definecolor{bgcolor}{RGB}{245, 245, 204}
+\pagecolor{bgcolor}
+]]
                     examplefile:write(options["preamble"] and options["preamble"] .. "\n" or "")
                     examplefile:write "\\begin{document}\n"
 
