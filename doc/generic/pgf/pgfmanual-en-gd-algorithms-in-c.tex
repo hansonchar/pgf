@@ -330,22 +330,26 @@ documentation
 [[
 This layout is used...
 ]]
-example
-[[
-\tikz \graph [fast simple example layout]
-{ a -- b -- c -- d -- e; };
-]]
+example {
+  options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{examples.c.SimpleDemoC}} ]],
+  code = [[
+    \tikz \graph [fast simple demo layout]
+    { a -- b -- c -- d -- e; };
+  ]]
+}
 
 key           "fast simple demo radius"
 documentation
 [[
 The radius parameter is used to ...
 ]]
-example
-[[
-\tikz \graph [fast simple demo layout, fast simple demo radius=1.25cm]
-{ a -> b -> c -> d -> e -> a };
-]]
+example {
+  options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{examples.c.SimpleDemoC}} ]],
+  code = [[
+    \tikz \graph [fast simple demo layout, fast simple demo radius=1.25cm]
+    { a -> b -> c -> d -> e -> a };
+  ]]
+}
 \end{codeexample}
 
 
