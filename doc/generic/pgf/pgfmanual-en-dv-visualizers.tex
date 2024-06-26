@@ -792,6 +792,50 @@ Now, let's see how this works:
 }
 
 \begin{codeexample}[width=7cm,preamble={\usetikzlibrary{datavisualization}}]
+\def\dovisualization{
+  \pgfkeysvalueof
+    {/data point/\pgfoovalueof{name}/execute at begin}
+    \pgfpathcircle{\pgfpointdvdatapoint}
+      {\pgfkeysvalueof{/data point/radius}}
+  \pgfkeysvalueof
+    {/data point/\pgfoovalueof{name}/execute at end}
+}
+
+\pgfooclass{circle visualizer} {
+  \attribute name;
+  \method circle visualizer(#1) { \pgfooset{name}{#1} }
+  \method default connects() {
+    \pgfoothis.get handle(\me)
+    \pgfkeysvalueof
+      {/pgf/data visualization/obj}.connect(
+        \me,visualize,visualize datapoint signal)
+  }
+  \method visualize() {
+    \pgfdvfilterpassedtrue
+    \pgfdvnamedvisualizerfilter
+    \ifpgfdvfilterpassed
+      \dovisualization
+    \fi
+  }
+}
+
+\tikzdatavisualizationset{
+  visualize as circle/.style={
+    new object={
+      when=after survey,
+      store=/tikz/data visualization/visualizers/#1,
+      class=circle visualizer,
+      arg1=#1
+    },
+    new visualizer={#1}{%
+      color=visualizer color,
+      every path/.style={fill,draw}, 
+    }{},
+    /data point/set=#1
+  },
+  visualize as circle/.default=circle
+}
+
 \tikz \datavisualization [
   scientific axes=clean,
   visualize as circle/.list={a, b, c},
