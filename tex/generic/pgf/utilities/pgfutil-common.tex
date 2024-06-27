@@ -98,7 +98,9 @@
 %
 % This macro is expandable.
 \def\pgfutil@ifundefined#1{%
-  \expandafter\pgfutil@ifx\csname#1\endcsname\relax}
+  \pgfdebug{line 101/pgfutil@ifundefined: checking if undefined: "#1"}%
+  \expandafter\pgfutil@ifx\csname#1\endcsname\relax%
+}
 
 % A variant of \pgfutil@ifundefined which will NOT let #1 to \relax it
 % is undefined.
@@ -332,6 +334,8 @@
 \def\pgferror#1{\pgfutil@packageerror{pgf}{#1}{}}
 \def\pgfwarning#1{\pgfutil@packagewarning{pgf}{#1}}
 
+\def\pgfutil@packagedebug#1#2{\immediate\write17{[DEBUG]: #2}}
+\def\pgfdebug#1{\pgfutil@packagedebug{pgf}{#1}}
 
 % Library files inclusion
 

@@ -35,23 +35,31 @@
   \gdef\pgf@filename{}%
   % If page= parameter is not empty, try that file first:
   \ifx\pgf@imagepage\pgfutil@empty%
+  % \pgfdebug{line 38}% **
   \else%
+  \pgfdebug{line 40: "\pgfsys@imagesuffixlist:+{#3.page\pgf@imagepage}"}%
   \expandafter\pgf@findfile\pgfsys@imagesuffixlist:+{#3.page\pgf@imagepage}%
   \fi%
+  % \pgfdebug{line 43}% **
   \ifx\pgf@filename\pgfutil@empty%
+    % \pgfdebug{line 45 finding file ...}% **
     \expandafter\pgf@findfile\pgfsys@imagesuffixlist:+{#3}%
   \else%
+    \pgfdebug{line 48}%
     \pgfkeys{/pgf/images/page=}% make page empty
   \fi%
   \ifx\pgf@filename\pgfutil@empty%
     \pgfwarning%
-    {File "#3" not found when defining image "#2".
+    {(line 53) File "#3" not found when defining image "#2".
       Tried all extensions in "\pgfsys@imagesuffixlist"}%
     \pgf@declaredraftimage{#2}{#3}%
   \else%
+    % \pgfdebug{line 57 found image ...}%
     \ifpgf@draftmode%
+      \pgfdebug{line 59 draft image ...}%
       \pgf@declaredraftimage{#2}{#3}%
     \else%
+      % \pgfdebug{line 62 image ...}%
       \pgfsys@defineimage%
     \fi%
   \fi%
@@ -82,6 +90,7 @@
 
 
 \def\pgf@findfile#1:#2+#3{%
+  % \pgfdebug{line 93/pgf@findfile: 1="#1", 2="#2", 3="#3}%
   \pgfutil@IfFileExists{#3#1}%
   {\xdef\pgf@filename{#3#1}}%
   {\def\pgf@mightbeempty{#2}%
@@ -181,23 +190,52 @@
 % \pgfputat{\pgforigin}{\pgfbox[left,base]{\pgfuseimage{myimage}}}
 
 \def\pgfuseimage#1{%
+  \pgfdebug{line 193/pgfuseimage 1="#1"}%
   \def\pgf@imagename{pgf@image@#1}%
   \pgf@tryextensions{\pgf@imagename}{\pgfalternateextension}%
+  % \pgfdebug{line 196, pgfalternateextension param: "\pgfalternateextension"}%
   \expandafter\pgfutil@ifundefined\expandafter{\pgf@imagename}%
   {\pgferror{Undefined image "#1"}}%
   {{\leavevmode\csname\pgf@imagename\endcsname}}}
 
 \def\pgf@tryextensions#1#2{%
-  \edef\pgf@args{[#2!]}\expandafter\pgf@@tryextensions\pgf@args{#1}}
+  \pgfdebug{line 202/pgf@tryextensions: 1="#1", 2="#2"}%
+  \edef\pgf@args{[#2!]}\expandafter\pgf@@tryextensions\pgf@args{#1}%
+  \pgfdebug{line 204/pgf@tryextensions: pgf@args="\pgf@args"}%
+}
+
 \def\pgf@@tryextensions[#1!#2]#3{%
+  \pgfdebug{============== 1="#1", 2="#2", 3="#3"}%
   \expandafter\pgfutil@ifundefined\expandafter{#3#1!#2}%
-  {\def\pgf@temp{#2}%
+  {%
+    \def\pgf@temp{#2}%
     \ifx\pgf@temp\pgfutil@empty%
-    \edef#3{#3!}%
+      \edef#3{#3!}%
+      \pgfdebug{line 214/pgf@@tryextensions: finalize to 3="#3"}%
     \else%
-    \pgf@@tryextensions[#2]{#3}%
-    \fi}%
-  {\edef#3{#3#1!#2}}}
+      \edef\foo{#3}%
+      \edef\bar{#3!}%
+      \pgfdebug{line 216/pgf@@tryextensions: trying with "[#1!]{#3}", foo="\foo", bar="\bar"}%
+      \pgf@@tryextensions[#1!]{#3}%
+      \pgfdebug{line 220/pgf@@tryextensions: 3="#3", foo="\foo", bar="\bar"}%
+      \edef\baz{#3}%
+      \newlength{\lenbar}\settowidth{\lenbar}{\bar}
+      \newlength{\lenbaz}\settowidth{\lenbaz}{\baz}
+      \ifdim\lenbar=\lenbaz%
+        % https://tex.stackexchange.com/questions/451/when-to-use-edef-noexpand-and-expandafter
+        \edef#3{\csname foo\endcsname}%
+        \pgfdebug{line 226/pgf@@tryextensions: trying with "[#2]{#3}"}%
+        \pgf@@tryextensions[#2]{#3}%
+      \else%
+        \pgfdebug{line 229/pgf@@tryextensions: (foo="\foo") different bar="\bar", baz="\baz"}%
+      \fi%
+    \fi%
+  }%
+  {%
+    \pgfdebug{line 221/pgf@@tryextensions: 3:"#3", 1:"#1", 2:"#2"}%
+    \edef#3{#3#1!#2}%
+    \pgfdebug{line 223/pgf@@tryextensions: finalize to "#3"}%
+  }}%
 
 
 % Alternate image
