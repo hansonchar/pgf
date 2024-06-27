@@ -213,21 +213,19 @@
       \edef#3{#3!}%
       \pgfdebug{line 214/pgf@@tryextensions: finalize to 3="#3"}%
     \else%
-      \edef\foo{#3}%
-      \edef\bar{#3!}%
-      \pgfdebug{line 216/pgf@@tryextensions: trying with "[#1!]{#3}", foo="\foo", bar="\bar"}%
+      \edef\pgf@saved{#3}%
+      \edef\pgf@before{#3!}%
+      \pgfdebug{line 216/pgf@@tryextensions: trying with "[#1!]{#3}", pgf@saved="\pgf@saved", pgf@before="\pgf@before"}%
       \pgf@@tryextensions[#1!]{#3}%
-      \pgfdebug{line 220/pgf@@tryextensions: 3="#3", foo="\foo", bar="\bar"}%
-      \edef\baz{#3}%
-      \newlength{\lenbar}\settowidth{\lenbar}{\bar}
-      \newlength{\lenbaz}\settowidth{\lenbaz}{\baz}
-      \ifdim\lenbar=\lenbaz%
+      \pgfdebug{line 220/pgf@@tryextensions: 3="#3", pgf@saved="\pgf@saved", pgf@before="\pgf@before"}%
+      \edef\pgf@after{#3}%
+      \ifx\pgf@before\pgf@after%
         % https://tex.stackexchange.com/questions/451/when-to-use-edef-noexpand-and-expandafter
-        \edef#3{\csname foo\endcsname}%
+        \edef#3{\csname pgf@saved\endcsname}%
         \pgfdebug{line 226/pgf@@tryextensions: trying with "[#2]{#3}"}%
         \pgf@@tryextensions[#2]{#3}%
       \else%
-        \pgfdebug{line 229/pgf@@tryextensions: (foo="\foo") different bar="\bar", baz="\baz"}%
+        \pgfdebug{line 229/pgf@@tryextensions: (pgf@saved="\pgf@saved") different pgf@before="\pgf@before", baz="\pgf@after"}%
       \fi%
     \fi%
   }%
