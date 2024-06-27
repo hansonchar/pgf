@@ -192,7 +192,7 @@
 }
 
 \def\pgf@@tryextensions[#1!#2]#3{%
-  \expandafter\pgfutil@ifundefined\expandafter{#3#1!#2}%
+  \expandafter\pgfutil@ifundefined\expandafter{#3.#1!#2}%
   {%
     \def\pgf@temp{#2}%
     \ifx\pgf@temp\pgfutil@empty%
@@ -210,7 +210,7 @@
     \fi%
   }%
   {%
-    \edef#3{#3#1!#2}%
+    \edef#3{#3.#1!#2}%
   }}%
 
 
