@@ -206,7 +206,7 @@
 
 \def\pgf@@tryextensions[#1!#2]#3{%
   \pgfdebug{============== 1="#1", 2="#2", 3="#3"}%
-  \expandafter\pgfutil@ifundefined\expandafter{#3#1!#2}%
+  \expandafter\pgfutil@ifundefined\expandafter{#3.#1!#2}%
   {%
     \def\pgf@temp{#2}%
     \ifx\pgf@temp\pgfutil@empty%
@@ -231,7 +231,7 @@
   }%
   {%
     \pgfdebug{line 221/pgf@@tryextensions: 3:"#3", 1:"#1", 2:"#2"}%
-    \edef#3{#3#1!#2}%
+    \edef#3{#3.#1!#2}%
     \pgfdebug{line 223/pgf@@tryextensions: finalize to "#3"}%
   }}%
 
