@@ -3,13 +3,16 @@
 ```bash
 # Set up the directories for example code extraction and compilatiom
 mkdir -p ~/tmp/mwe/plots
-mkdir -p ~/tmp/mwe/generic/pgf/plots
+cp ~/github.com/pgf/doc/generic/pgf/plots/* ~/tmp/mwe/plots/
 
 cd ~/tmp/mwe
 ln -s ~/github.com/pgf/doc/generic/pgf/images
 
-cd ~/tmp/mwe/generic/pgf
-ln -s ~/github.com/pgf/doc/generic/pgf/images
+# Set up for vs-code
+# mkdir -p ~/tmp/mwe/generic/pgf/plots
+# cp ~/github.com/pgf/doc/generic/pgf/plots/* ~/tmp/mwe/generic/pgf/plots
+# cd ~/tmp/mwe/generic/pgf
+# ln -s ~/github.com/pgf/doc/generic/pgf/images
 
 # Clean up
 find ~/tmp/mwe -name '*.tex' -o -name '*.aux' -o -name '*.log' -o -name '*.gz' -o -name '*.pdf' | xargs rm
