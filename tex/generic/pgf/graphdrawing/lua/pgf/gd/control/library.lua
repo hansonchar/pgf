@@ -150,7 +150,7 @@ declare {
     into account when drawing a graph.
   "]],
   examples = {
-    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{phylogenetics}} ]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{phylogenetics,trees}} ]],
     [["
       \tikz \graph [phylogenetic tree layout] {
         a --[length=2] b --[length=1] {c,d};
