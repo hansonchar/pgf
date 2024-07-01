@@ -53,3 +53,10 @@ time for i in $(find . -name '*.tex'); do
     n=$((n+1))
 done 2>&1 | tee ./compilation.log
 ```
+
+## Progress monitor
+
+```bash
+cd ~/tmp/mwe
+watch 'cat compilation.log | grep -i fail'
+```
