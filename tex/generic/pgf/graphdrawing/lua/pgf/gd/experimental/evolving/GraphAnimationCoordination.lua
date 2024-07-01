@@ -121,7 +121,7 @@ declare {
     this key by yourself then because this key starts the default
     algorithm algorithm of the phase.
     %
-    \begin{codeexample}[]
+    \begin{codeexample}[code only]
      local ga_class = self.digraph.options.algorithm_phases['evolving graph animation']
      -- animate graph
      ga_class.new {
