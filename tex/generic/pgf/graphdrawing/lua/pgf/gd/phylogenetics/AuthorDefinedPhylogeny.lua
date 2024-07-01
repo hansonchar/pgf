@@ -33,7 +33,7 @@ declare {
   phase = "phylogenetic tree generation",
   phase_default = true,
 
-  summary = [["  
+  summary = [["
     When this key is used, the phylogenetic tree must be specified
     by the author (rather than being generated algorithmically).
   "]],
@@ -44,7 +44,7 @@ declare {
     the use of the |length| key for each edge.
   "]],
   examples = {
-    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{phylogenetics}} ]],
+    options = [[ preamble={\usetikzlibrary{graphs,graphdrawing} \usegdlibrary{phylogenetics,trees}} ]],
     [[
       \tikz \graph [phylogenetic tree layout] {
         a -- {
@@ -59,7 +59,6 @@ declare {
 
 
 function AuthorDefinedPhylogeny:run()
-  
   local spanning_tree = self.main_algorithm.digraph.options.algorithm_phases["spanning tree computation"].new {
     ugraph = self.main_algorithm.ugraph,
     events = {} -- no events
@@ -67,7 +66,7 @@ function AuthorDefinedPhylogeny:run()
 
   local phylogenetic_tree = Direct.ugraphFromDigraph(spanning_tree)
   local lengths = self.lengths
-  
+
   for _,a in ipairs(phylogenetic_tree.arcs) do
     lengths[a.tail][a.head] = a:options('length')
   end
