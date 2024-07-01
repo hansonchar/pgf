@@ -102,9 +102,9 @@ To speedup the compilation, you may wish to use the following class option:
     \end{itemize}
     %
 \begin{codeexample}[code only]
-\pgfdeclareimage[interpolate=true,height=1cm]{image1}{brave-gnu-world-logo}
-\pgfdeclareimage[interpolate=true,width=1cm,height=1cm]{image2}{brave-gnu-world-logo}
-\pgfdeclareimage[interpolate=true,height=1cm]{image3}{brave-gnu-world-logo}
+\pgfdeclareimage[interpolate=true,height=1cm]{image1}{images/brave-gnu-world-logo}
+\pgfdeclareimage[interpolate=true,width=1cm,height=1cm]{image2}{images/brave-gnu-world-logo}
+\pgfdeclareimage[interpolate=true,height=1cm]{image3}{images/brave-gnu-world-logo}
 \end{codeexample}
     %
 \end{command}
@@ -198,11 +198,11 @@ To speedup the compilation, you may wish to use the following class option:
 \begin{colormixin}{25!white}
 \begin{pgfpicture}
   \pgftext[at=\pgfpoint{1cm}{5cm},left,base]
-    {\pgfimage[interpolate=true,width=1cm,height=1cm]{brave-gnu-world-logo}}
+    {\pgfimage[interpolate=true,width=1cm,height=1cm]{images/brave-gnu-world-logo}}
   \pgftext[at=\pgfpoint{1cm}{3cm},left,base]
-    {\pgfimage[interpolate=true,width=1cm]{brave-gnu-world-logo}}
+    {\pgfimage[interpolate=true,width=1cm]{images/brave-gnu-world-logo}}
   \pgftext[at=\pgfpoint{1cm}{1cm},left,base]
-    {\pgfimage[interpolate=true,height=1cm]{brave-gnu-world-logo}}
+    {\pgfimage[interpolate=true,height=1cm]{images/brave-gnu-world-logo}}
 
   \pgfpathrectangle{\pgfpoint{1cm}{5cm}}{\pgfpoint{1cm}{1cm}}
   \pgfpathrectangle{\pgfpoint{1cm}{3cm}}{\pgfpoint{1cm}{1cm}}
@@ -259,10 +259,10 @@ color(2cm)=(green); color(4cm)=(blue); color(6cm)=(red);
 color(8cm)=(green); color(10cm)=(blue); color(12cm)=(red);
 color(14cm)=(green)}
 \hbox{\pgfuseshading{colorful}\hskip-14cm\hskip1cm
-\pgfimage[height=4cm]{brave-gnu-world-logo}\hskip1cm
-\pgfimage[height=4cm]{brave-gnu-world-logo-mask}\hskip1cm
-\pgfdeclaremask{mymask}{brave-gnu-world-logo-mask}
-\pgfimage[mask=mymask,height=4cm,interpolate=true]{brave-gnu-world-logo}}
+\pgfimage[height=4cm]{images/brave-gnu-world-logo}\hskip1cm
+\pgfimage[height=4cm]{images/brave-gnu-world-logo-mask}\hskip1cm
+\pgfdeclaremask{mymask}{images/brave-gnu-world-logo-mask}
+\pgfimage[mask=mymask,height=4cm,interpolate=true]{images/brave-gnu-world-logo}}
 \end{codeexample}
     %
 \end{command}
