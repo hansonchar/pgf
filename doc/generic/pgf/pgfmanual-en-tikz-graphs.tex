@@ -48,10 +48,8 @@ following:
   };
 \end{codeexample}
 
-\begin{codeexample}[
-    preamble={\usetikzlibrary{graphs}},
-    pre={\definecolor{graphicbackground}{rgb}{0.96,0.96,0.8}},
-]
+\begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
+\definecolor{graphicbackground}{rgb}{0.96,0.96,0.8}
 \tikz
   \graph [nodes={draw, circle}, clockwise, radius=.75cm, empty nodes, n=8] {
     subgraph C_n [name=inner] <->[shorten <=1pt, shorten >=1pt]
@@ -60,6 +58,7 @@ following:
 \end{codeexample}
 
 \begin{codeexample}[width=6.6cm,preamble={\usetikzlibrary{graphs}}]
+\definecolor{graphicbackground}{rgb}{0.96,0.96,0.8}
 \tikz [>={To[sep]}, rotate=90, xscale=-1,
        mark/.style={fill=black!50}, mark/.default=]
   \graph [trie, simple,
